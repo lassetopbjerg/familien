@@ -131,6 +131,7 @@ h1{font:700 clamp(28px,6vw,40px)/1.05 var(--display);margin:4px 0 0;letter-spaci
 .confirm-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .qa{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:14px;display:grid;gap:6px}
 .qa-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.qa-modes{display:flex;gap:6px;flex-wrap:wrap}
 .qa-kind{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .qa-kind.k-shop{color:var(--accent)}.qa-kind.k-cal{color:var(--lasse)}.qa-kind.k-task{color:var(--ida)}
 .qa-what{font-weight:600}
@@ -347,11 +348,16 @@ textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;pa
   <div class="note" id="note" hidden></div>
   <form class="qa" id="qa-form" autocomplete="off">
     <label class="qa-label" for="qa-input">Tilføj hurtigt</label>
+    <div class="qa-modes" role="group" aria-label="Hvad vil du tilføje?">
+      <button class="tg qa-mode" type="button" data-mode="shop" aria-pressed="true">Indkøb</button>
+      <button class="tg qa-mode" type="button" data-mode="task" aria-pressed="false">Opgave</button>
+      <button class="tg qa-mode" type="button" data-mode="cal" aria-pressed="false">Kalender</button>
+    </div>
     <div class="addrow">
-      <input type="text" id="qa-input" enterkeyhint="send" placeholder="Fx “mælk og bleer, tandlæge tirsdag kl. 10, Ida støvsuger lørdag”">
+      <input type="text" id="qa-input" enterkeyhint="send" placeholder="Fx mælk, bleer og rugbrød">
       <button class="btn" type="submit" id="qa-go">Tilføj</button>
     </div>
-    <span class="hint">Tryk på mikrofonen på telefonens tastatur for at sige det i stedet for at skrive.</span>
+    <span class="hint" id="qa-hint">Skriv, eller tryk på mikrofonen på telefonens tastatur og sig det.</span>
   </form>
 
   <nav class="tabs" role="tablist" aria-label="Sektioner">
@@ -1757,11 +1763,37 @@ $('store-clear').onclick=()=>bulkDelete('shopping',S.shopping.filter(s=>s.done).
 
 /* ---------- tilføj hurtigt (text or keyboard dictation) ---------- */
 let qaItems=[],qaBusy=false;
+/* dictation tends to add a full stop and a capital: "Mælk og bleer." */
+const tidy=x=>{x=x.replace(/^[\s.,!?;:]+|[\s.,!?;:]+$/g,'');return x?x[0].toUpperCase()+x.slice(1):''};
 function qaFallback(text){
-  return text.split(/,|\bog\b|\n/i).map(x=>x.trim()).filter(Boolean).map(x=>({kind:'shop',name:x[0].toUpperCase()+x.slice(1),on:true}));
+  return text.split(/,|\bog\b|\n/i).map(tidy).filter(Boolean).map(x=>({kind:'shop',name:x,on:true}));
 }
+/* The buttons above the field say what the text is: shopping (split into items), a chore (opens the chore
+   sheet with the name filled in) or a calendar event (opens Google Calendar's own "new event" page). */
+const QA_MODES={
+  shop:{ph:'Fx mælk, bleer og rugbrød',go:'Tilføj',hint:'Skriv, eller tryk på mikrofonen på telefonens tastatur og sig det.'},
+  task:{ph:'Fx støvsug stuen',go:'Næste',hint:'Bagefter vælger du, hvem der gør det, og hvilke dage.'},
+  cal:{ph:'Fx tandlæge med Ubbe',go:'Åbn kalender',hint:'Åbner Google Kalender, hvor du vælger dag, tid og Familie-kalenderen.'},
+};
+let qaMode='shop';
+function setQaMode(m){
+  if(!QA_MODES[m])m='shop';qaMode=m;
+  document.querySelectorAll('.qa-mode').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===m)));
+  $('qa-input').placeholder=QA_MODES[m].ph;$('qa-go').textContent=QA_MODES[m].go;$('qa-hint').textContent=QA_MODES[m].hint;
+  try{localStorage.setItem('fb-qa-mode',m)}catch(e){}
+}
+document.querySelectorAll('.qa-mode').forEach(b=>b.onclick=()=>{setQaMode(b.dataset.mode);$('qa-input').focus()});
+try{setQaMode(localStorage.getItem('fb-qa-mode')||'shop')}catch(e){setQaMode('shop')}
 async function quickAdd(text){
   text=text.trim();if(!text||qaBusy)return;
+  if(qaMode==='task'){
+    $('qa-input').value='';openChore(null);$('ch-title').value=tidy(text);return;
+  }
+  if(qaMode==='cal'){
+    $('qa-input').value='';
+    window.open('https://calendar.google.com/calendar/render?'+new URLSearchParams({action:'TEMPLATE',text:tidy(text),ctz:TZ}),'_blank','noopener');
+    return;
+  }
   if(!sample){qaItems=qaFallback(text);renderQa(text);return}
   qaBusy=true;$('qa-go').disabled=true;$('qa-go').textContent='Tænker…';
   const t=today(),days=[];
