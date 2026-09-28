@@ -1496,6 +1496,8 @@ async function maybeAutoPlan(){
   autoTried=true;
   const t=iso(today()),mon=parse(WEEKLY.weekStart);
   if(t<iso(addDays(mon,-1))||t>iso(addDays(mon,4)))return;
+  /* only a menu made from the Sunday before (when the new flyers are out) plans the week; an older one, such as a test run, only shows under "Foreslå menu" */
+  if(String(WEEKLY.generated||'').slice(0,10)<iso(addDays(mon,-1)))return;
   const week=WEEKLY.week||WEEKLY.weekStart;
   const doneFor=S.settings.find(x=>x.id==='autoplan');
   if(doneFor&&doneFor.week===week)return;
