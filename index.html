@@ -181,6 +181,9 @@ h1{font:700 clamp(28px,6vw,40px)/1.05 var(--display);margin:4px 0 0;letter-spaci
 .mn-row.left{background:var(--bg)}
 .mn-row.left .dish{color:var(--muted);font-weight:500}
 .mn-row.off .dish,.mn-row.off .why{opacity:.45;text-decoration:line-through}
+.mn-row.pool{grid-template-columns:6.5em minmax(0,1fr);cursor:default}
+.mn-row.pool select{padding:6px 8px}
+.mn-row.pool.unpicked .dish{color:var(--muted);font-weight:500}
 .mn-left{margin-top:12px;font-size:14px}
 .mn-left summary{cursor:pointer;color:var(--muted);font-weight:600}
 .mn-left .toggles{margin:8px 0 4px}
@@ -1241,7 +1244,7 @@ function renderOffers(){
   const box=$('offers'),o=offersDoc(),items=liveOffers();
   const fresh=items.length>0;
   box.hidden=false;
-  $('suggest-menu').hidden=!sample;
+  $('suggest-menu').hidden=!sample&&!savedMenu().length;
   const meta=$('offers-meta');
   if(items.length&&fresh){
     const stores=[...new Set(items.map(x=>x.store))];
@@ -1325,8 +1328,41 @@ toggleGroup($('mn-left'),DS.slice(0,5).map((d,i)=>({v:String(i),label:d.slice(0,
 $('mn-left').addEventListener('click',()=>setTimeout(()=>{
   setDoc('settings','menu',{leftoverDays:getPressed($('mn-left')).map(Number).sort()});
 },0));
+/* Without Claude in the page, "Foreslå menu" shows the week's pool of dishes that Claude Code
+   wrote to settings/suggestions ({week, dishes:[{dish, why, ingredients:[{name, offer, kr}]}]}).
+   The family gives the dishes they want a free weekday; the rest are left out. */
+function savedMenu(){
+  const d=S.settings.find(x=>x.id==='suggestions');
+  if(!d||!Array.isArray(d.dishes)||!menuTargets().length)return[];
+  const r=weekRange(),planned=new Set(S.meals.filter(m=>m.id>=iso(r.start)&&m.id<iso(r.end)&&m.name).map(m=>m.name.toLowerCase()));
+  return d.dishes.filter(x=>x&&typeof x.dish==='string'&&!planned.has(x.dish.toLowerCase()));
+}
+function showSavedMenu(){
+  menuSug=savedMenu().map(x=>({date:null,dish:x.dish,why:typeof x.why==='string'?x.why:'',
+    ingredients:Array.isArray(x.ingredients)?x.ingredients.filter(i=>i&&typeof i.name==='string'):[],on:false}));
+  if(!menuSug.length){toast('Der er ingen nye forslag eller ledige dage i den viste uge.');return}
+  $('mn-h').textContent='Ugens forslag';
+  $('mn-again').hidden=true;$('mn-left').closest('details').hidden=true;
+  $('mn-sheet').hidden=false;
+  renderPool();
+}
+function renderPool(){
+  const free=menuTargets();
+  $('mn-hint').textContent='Vælg en dag ud for de retter, I vil have.'+(liveOffers().length?' Bygget på ugens tilbud fra Netto og REMA.':'');
+  $('mn-list').replaceChildren(...menuSug.map((m,i)=>h('div',{class:'mn-row pool'+(m.date?'':' unpicked')},
+    h('select',{id:'mn-p-'+i,'aria-label':'Dag for '+m.dish,onchange:e=>{
+      const v=e.target.value||null;
+      if(v)menuSug.forEach(o=>{if(o!==m&&o.date===v){o.date=null;o.on=false}});
+      m.date=v;m.on=!!v;renderPool();
+    }},h('option',{value:''},'–'),...free.map(ds=>{const d=parse(ds);return h('option',{value:ds,selected:m.date===ds},DS[dow(d)]+' '+d.getDate())})),
+    h('span',null,h('div',{class:'dish'},m.dish),m.why?h('div',{class:'why'},m.why):null))));
+  menuSummary();
+}
 async function suggestMenu(){
-  if(!sample||menuBusy)return;
+  if(!sample){showSavedMenu();return}
+  if(menuBusy)return;
+  $('mn-h').textContent='Forslag til ugens menu';
+  $('mn-again').hidden=false;$('mn-left').closest('details').hidden=false;
   const targets=menuTargets();
   if(!targets.length){toast('Alle hverdage i den viste uge har allerede aftensmad.');return}
   const lefts=leftoverDays();
@@ -1391,6 +1427,9 @@ function renderMenuSug(hadOffers){
       h('span',{class:'d'},DS[dow(d)],h('b',null,String(d.getDate()))),
       h('span',null,h('div',{class:'dish'},m.dish,m.double?h('span',{class:'mn-tag'},'dobbelt'):null),m.why?h('div',{class:'why'},m.why):null));
   }));
+  menuSummary();
+}
+function menuSummary(){
   const on=menuSug.filter(x=>x.on&&!x.leftover);
   const items=new Set();on.forEach(m=>m.ingredients.forEach(i=>items.add(baseName(i.name))));
   const est=on.reduce((a,m)=>a+m.ingredients.reduce((b,i)=>b+(Number(i.kr)||0),0),0);
