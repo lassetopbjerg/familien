@@ -396,23 +396,14 @@ input[type=text]:focus,input[type=url]:focus,textarea:focus,select:focus{border-
 .tn-dish{font:700 20px/1.15 var(--display);overflow-wrap:anywhere}
 .tn-who{font-size:13.5px;color:var(--muted)}
 .tonight.empty .tn-dish{color:var(--muted);font-weight:600}
-.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tile{display:grid;gap:2px;justify-items:start;text-align:left;border:1px solid var(--line);border-radius:var(--r-lg);padding:12px 14px;background:var(--surface);color:var(--ink)}
-.tile svg{width:24px;height:24px;margin-bottom:4px}
-.tile b{font:700 26px/1 var(--display);font-variant-numeric:tabular-nums}
-.tile span{font-size:13px;color:var(--muted)}
-.tile.shop svg,.tile.shop b{color:var(--accent)}
-.tile.chores svg,.tile.chores b{color:var(--lasse)}
-.tile.chores.all-done svg,.tile.chores.all-done b{color:var(--accent)}
-.tonight:hover,.tile:hover{filter:brightness(.98)}
-@media (min-width:980px){.glance{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);align-items:stretch}}
+.tonight:hover{filter:brightness(.98)}
 
 /* ---------- Hjemlig stil, round 2: the B layout ----------
    Lifted white cards on a tinted ground, days as rows with a date badge, round checkboxes, colour pills. */
 :root{--bg:#EDF0EC; --sunk:#E4E8E2; --card-shadow:0 1px 2px rgba(25,40,32,.07),0 6px 16px rgba(25,40,32,.06)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111513; --sunk:#222924; --card-shadow:0 1px 2px rgba(0,0,0,.45)}}
 :root[data-theme="dark"]{--bg:#111513; --sunk:#222924; --card-shadow:0 1px 2px rgba(0,0,0,.45)}
-.card,.day,.agenda,.offers,.qa,.calbox,.tile,.cat ul,.mn-rows,.rcp-ing,.rcp-steps li{border:0;box-shadow:var(--card-shadow)}
+.card,.day,.agenda,.offers,.qa,.calbox,.cat ul,.mn-rows,.rcp-ing,.rcp-steps li{border:0;box-shadow:var(--card-shadow)}
 .tonight{box-shadow:none}
 
 /* days */
@@ -495,7 +486,7 @@ input[type=checkbox]:checked::after{content:"";width:10px;height:5px;border-left
     <span class="hint" id="qa-hint">Skriv, eller tryk på mikrofonen på telefonens tastatur og sig det.</span>
   </form>
 
-  <!-- today at a glance: tonight's dinner in the cook's colour, then shopping and chores -->
+  <!-- today at a glance: tonight's dinner in the cook's colour -->
   <section class="glance" id="today-strip" hidden>
     <button class="tonight" id="tonight" type="button">
       <span class="tn-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M5 11v6a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-6"/><path d="M8 7c0-1.5 1-2 1-3M12 7c0-1.5 1-2 1-3M16 7c0-1.5 1-2 1-3"/></svg></span>
@@ -503,16 +494,6 @@ input[type=checkbox]:checked::after{content:"";width:10px;height:5px;border-left
       <span class="tn-dish" id="tonight-dish"></span>
       <span class="tn-who" id="tonight-who"></span>
     </button>
-    <div class="tiles">
-      <button class="tile shop" id="tile-shop" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>
-        <b id="tile-shop-n">0</b><span id="tile-shop-l">varer på listen</span>
-      </button>
-      <button class="tile chores" id="tile-chores" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
-        <b id="tile-ch-n">0</b><span id="tile-ch-l">opgaver i dag</span>
-      </button>
-    </div>
   </section>
 
   <nav class="tabs" role="tablist" aria-label="Sektioner">
@@ -975,7 +956,7 @@ function render(){
   renderOffers();renderWeek();renderShop();renderChores();renderSummary();
   if(!$('rcp').hidden)renderRecipe();
 }
-/* Today at a glance: the "I aften" card (in the cook's colour) and the shopping and chore tiles. */
+/* Today at a glance: the "I aften" card in the cook's colour, plus the counts on the section tabs. */
 function renderSummary(){
   $('summary').hidden=loaded;$('today-strip').hidden=!loaded;
   if(!loaded){$('summary').textContent='Indlæser tavlen…';return}
@@ -987,16 +968,9 @@ function renderSummary(){
   const who=m?[ck?PEOPLE[ck].name+' laver mad':isLeftover(m)?'Restedag':'Hvem laver mad?']:['Tryk for at planlægge'];
   if(miss)who.push(' · '+miss+(miss===1?' vare mangler':' varer mangler'));
   $('tonight-who').textContent=who.join('');
-  $('tile-shop-n').textContent=sh;$('tile-shop-l').textContent=sh===1?'vare på listen':'varer på listen';
-  $('tile-ch-n').textContent=chs.length?(chs.length-left)+'/'+chs.length:'0';
-  $('tile-ch-l').textContent=!chs.length?'opgaver i dag':left?'opgaver klaret i dag':'alt klaret i dag';
-  $('tile-chores').classList.toggle('all-done',!!chs.length&&!left);
   $('n-shop').textContent=sh?'· '+sh:'';$('n-chores').textContent=left?'· '+left:'';
 }
-function showPanel(name){setTab(name);document.querySelector('[data-panel="'+name+'"]').scrollIntoView({behavior:'smooth',block:'start'})}
 $('tonight').onclick=()=>openDinner(iso(today()));
-$('tile-shop').onclick=()=>showPanel('shop');
-$('tile-chores').onclick=()=>showPanel('chores');
 function evRow(e){
   return h('li',null,h('button',{class:'ev',type:'button',onclick:()=>openEvent(e)},
     h('span',{class:'t'+(e.soft?' soft':'')},e.label||'–'),
