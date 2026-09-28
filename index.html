@@ -450,9 +450,11 @@ input[type=checkbox]:checked::after{content:"";width:10px;height:5px;border-left
 /* week section: slim dinner overview above the days, calendar below them */
 .offers{padding:12px 14px}
 .offers-title strong{font:600 15px var(--display)}
-.calhead{margin-top:18px}
-.calhead .btn{padding:8px 14px}
-.calbox iframe{height:380px}
+.maincol{display:grid;gap:28px;align-content:start;min-width:0}
+a.btn{text-decoration:none;display:inline-block}
+[data-panel="cal"] .phead .btn{padding:8px 14px}
+.calbox iframe{height:min(70vh,560px)}
+.tab{padding-inline:2px}
 .calhint{margin:0;padding:10px 12px}
 .weekdiv{margin-top:8px}
 </style>
@@ -498,11 +500,13 @@ input[type=checkbox]:checked::after{content:"";width:10px;height:5px;border-left
 
   <nav class="tabs" role="tablist" aria-label="Sektioner">
     <button class="tab" role="tab" id="tab-week" data-tab="week" aria-selected="true">Uge</button>
+    <button class="tab" role="tab" id="tab-cal" data-tab="cal" aria-selected="false">Kalender</button>
     <button class="tab" role="tab" id="tab-shop" data-tab="shop" aria-selected="false">Indkøb <span class="n" id="n-shop"></span></button>
     <button class="tab" role="tab" id="tab-chores" data-tab="chores" aria-selected="false">Opgaver <span class="n" id="n-chores"></span></button>
   </nav>
 
   <div class="panels">
+    <div class="maincol">
     <section class="panel" data-panel="week">
       <div class="phead">
         <h2>Ugen</h2>
@@ -526,13 +530,18 @@ input[type=checkbox]:checked::after{content:"";width:10px;height:5px;border-left
         </div>
       </div>
       <div class="days" id="days"></div>
-      <div class="phead calhead"><h2>Kalender</h2><a class="btn ghost" href="https://calendar.google.com/calendar/r" target="_blank" rel="noopener">Åbn Google Kalender</a></div>
+    </section>
+
+    <!-- its own tab on phones; under the week on a computer -->
+    <section class="panel" data-panel="cal" data-hide="1">
+      <div class="phead"><h2>Kalender</h2><a class="btn ghost" href="https://calendar.google.com/calendar/r" target="_blank" rel="noopener">Åbn Google Kalender</a></div>
       <div class="calbox">
         <iframe id="cal-frame" title="Familiekalender" hidden></iframe>
         <p class="hint" id="cal-note" hidden>Ingen kalender er sat op til tavlen endnu.</p>
         <p class="hint calhint">Tom kalender? Log ind på Google i denne browser, eller brug knappen ovenfor.</p>
       </div>
     </section>
+    </div>
 
     <div class="side">
       <section class="panel" data-panel="shop" data-hide="1">
