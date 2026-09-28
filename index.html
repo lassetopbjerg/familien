@@ -1236,7 +1236,10 @@ $('shop-est').onclick=()=>estimatePrices();
 function queueEstimate(){if(!sampleOk)return;clearTimeout(estTimer);estTimer=setTimeout(estimatePrices,4000)}
 
 /* ---------- offers + menu suggestions ---------- */
-const offersDoc=()=>S.offers.find(o=>o.id==='current');
+/* ugemenu.json is written every Sunday by a scheduled Claude job: {week, weekStart, offers:{items,…}, dishes:[…]}.
+   It sits next to this page on GitHub, so the job never needs access to the family's database. */
+let WEEKLY=null;
+const offersDoc=()=>WEEKLY&&WEEKLY.offers&&Array.isArray(WEEKLY.offers.items)?WEEKLY.offers:S.offers.find(o=>o.id==='current');
 /* offers still running today; each store's avis ends on its own day */
 const liveOffers=()=>{const o=offersDoc(),t=iso(today());return o&&Array.isArray(o.items)?o.items.filter(x=>!x.to||x.to>=t):[]};
 function fmtD(ds){const d=parse(ds);return d.getDate()+'. '+MO[d.getMonth()].slice(0,3)}
@@ -1332,7 +1335,7 @@ $('mn-left').addEventListener('click',()=>setTimeout(()=>{
    wrote to settings/suggestions ({week, dishes:[{dish, why, ingredients:[{name, offer, kr}]}]}).
    The family gives the dishes they want a free weekday; the rest are left out. */
 function savedMenu(){
-  const d=S.settings.find(x=>x.id==='suggestions');
+  const d=WEEKLY&&Array.isArray(WEEKLY.dishes)?WEEKLY:S.settings.find(x=>x.id==='suggestions');
   if(!d||!Array.isArray(d.dishes)||!menuTargets().length)return[];
   const r=weekRange(),planned=new Set(S.meals.filter(m=>m.id>=iso(r.start)&&m.id<iso(r.end)&&m.name).map(m=>m.name.toLowerCase()));
   return d.dishes.filter(x=>x&&typeof x.dish==='string'&&!planned.has(x.dish.toLowerCase()));
@@ -1439,7 +1442,7 @@ function menuSummary(){
 }
 /* Plan every chosen dinner and put all ingredients on the list at once:
    work everything out on the device first, show it straight away, then save in the background. */
-async function applyMenu(){
+async function applyMenu(prefix=''){
   const chosen=menuSug.filter(m=>m.on);if(!chosen.length)return;
   $('mn-sheet').hidden=true;
   const newId=col=>db?db.collection(col).doc().id:'l'+Math.random().toString(36).slice(2);
@@ -1478,9 +1481,58 @@ async function applyMenu(){
   menuSug=[];
   wkOpen=false;try{localStorage.setItem('fb-wk-open','0')}catch(e){}
   render();
-  toast(chosen.length+(chosen.length===1?' ret':' retter')+' planlagt. '+n+(n===1?' vare':' varer')+' sat på indkøbslisten'+(shared?', '+shared+' stod der allerede.':'.'),6000);
+  toast(prefix+chosen.length+(chosen.length===1?' ret':' retter')+' planlagt. '+n+(n===1?' vare':' varer')+' sat på indkøbslisten'+(shared?', '+shared+' stod der allerede.':'.'),8000);
   await runJobs(jobs);
   queueEstimate();
+}
+
+/* ---------- automatic weekly plan ----------
+   The first time someone opens the board in the new menu's week (from the Sunday before), the free weekdays
+   get the week's dishes in order. Leftover days get "Rester" and the day before a double portion.
+   settings/autoplan remembers the week, and a transaction makes sure only one phone does it. */
+let autoTried=false;
+async function maybeAutoPlan(){
+  if(autoTried||!loaded||!db||!WEEKLY||!Array.isArray(WEEKLY.dishes)||!/^\d{4}-\d{2}-\d{2}$/.test(WEEKLY.weekStart||''))return;
+  autoTried=true;
+  const t=iso(today()),mon=parse(WEEKLY.weekStart);
+  if(t<iso(addDays(mon,-1))||t>iso(addDays(mon,4)))return;
+  const week=WEEKLY.week||WEEKLY.weekStart;
+  const doneFor=S.settings.find(x=>x.id==='autoplan');
+  if(doneFor&&doneFor.week===week)return;
+  try{
+    await db.runTransaction(async tx=>{
+      const ref=db.doc('settings/autoplan'),snap=await tx.get(ref);
+      if(snap.exists&&snap.data().week===week)throw{code:'already'};
+      tx.set(ref,{week,at:Date.now()});
+    });
+  }catch(e){return}
+  const days=[0,1,2,3,4].map(i=>iso(addDays(mon,i))).filter(ds=>ds>=t);
+  const lefts=leftoverDays(),free=days.filter(ds=>!mealOn(ds));
+  const used=new Set(S.meals.filter(m=>days.includes(m.id)&&m.name).map(m=>m.name.toLowerCase()));
+  const pool=WEEKLY.dishes.filter(x=>x&&typeof x.dish==='string'&&!used.has(x.dish.toLowerCase()));
+  const plan=[];
+  for(const ds of free){
+    if(lefts.includes(dow(parse(ds))))continue;
+    const x=pool.shift();if(!x)break;
+    plan.push({date:ds,dish:x.dish,why:x.why||'',ingredients:Array.isArray(x.ingredients)?x.ingredients.filter(i=>i&&typeof i.name==='string'):[],on:true});
+  }
+  for(const ds of free){
+    if(!lefts.includes(dow(parse(ds))))continue;
+    const prev=iso(addDays(parse(ds),-1)),src=plan.find(p=>p.date===prev),had=mealOn(prev);
+    if(src)src.double=true;
+    const base=src?src.dish:had&&!isLeftover(had)?had.name:null;
+    plan.push({date:ds,dish:base?'Rester: '+base:dow(parse(ds))===0?'Rester fra weekenden':'Rester',why:'',ingredients:[],on:true,leftover:true});
+  }
+  if(!plan.length)return;
+  menuSug=plan;
+  await applyMenu('Ugens menu er lagt ind: ');
+}
+async function loadWeekly(){
+  try{
+    const r=await fetch('ugemenu.json?t='+Date.now(),{cache:'no-store'});
+    if(r.ok)WEEKLY=await r.json();
+  }catch(e){}
+  render();maybeAutoPlan();
 }
 $('suggest-menu').onclick=()=>suggestMenu();
 $('mn-again').onclick=()=>suggestMenu();
@@ -1794,7 +1846,7 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>setTab(t.dataset.tab)
 try{const saved=localStorage.getItem('fb-tab');if(saved)setTab(saved)}catch(e){}
 
 let lastDay=iso(today());
-setInterval(()=>{const d=iso(today());if(d!==lastDay){lastDay=d;watchWeek()}},60000);
+setInterval(()=>{const d=iso(today());if(d!==lastDay){lastDay=d;watchWeek();if(db){autoTried=false;loadWeekly()}}},60000);
 
 /* ---------- sign-in (Firebase Auth with Google) ---------- */
 firebase.initializeApp(FIREBASE_CONFIG);
@@ -1859,10 +1911,13 @@ function startBoard(fs){
   for(const col of cols){
     db.collection(col).onSnapshot(snap=>{
       S[col]=snap.docs.map(d=>({id:d.id,...d.data()}));
-      seen.add(col);if(seen.size===cols.length)loaded=true;
+      seen.add(col);
+      const first=!loaded&&seen.size===cols.length;if(first)loaded=true;
       render();
+      if(first)maybeAutoPlan();
     },()=>{const n=$('note');n.hidden=false;n.textContent='Forbindelsen til den fælles liste og opgaverne blev afbrudt. Genindlæs siden.'});
   }
+  loadWeekly();
 }
 })();
 </script>
