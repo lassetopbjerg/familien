@@ -1282,7 +1282,7 @@ async function planMeal(ds,name,ings,addToList,offers){
     else if(JSON.stringify(r.ingredients||[])!==JSON.stringify(ings))await upd('recipes',r.id,{ingredients:ings});
   }
   await clearMealItems(ds);
-  await setDoc('meals',ds,{name,ingredients:ings,cook:mealCook!==undefined?mealCook:cookOn(ds)});
+  await setDoc('meals',ds,{name,ingredients:ings,cook:mealCook!==undefined?mealCook:cookOn(ds),listed:!!addToList});
   let n=0,shared=0;
   if(addToList){
     for(const ing of ings){
@@ -1414,9 +1414,11 @@ function weekMenuDays(){
   for(let d=new Date(r.start);d<r.end;d=addDays(d,1))if(dow(d)<5)out.push(iso(d));
   return out;
 }
-/* ingredients of planned dinners that aren't on the shopping list yet */
+/* Ingredients of a planned dinner that were never put on the shopping list.
+   Once a dinner's ingredients have gone on the list (listed), the list is in charge: ticking them off or
+   removing them means bought, not missing. Dinners saved before this flag existed count as listed. */
 function missingFor(ds){
-  const m=mealOn(ds);if(!m||!Array.isArray(m.ingredients))return[];
+  const m=mealOn(ds);if(!m||!Array.isArray(m.ingredients)||m.listed!==false)return[];
   return m.ingredients.filter(ing=>{
     const b=baseName(ing);
     return !S.shopping.some(x=>baseName(x.name)===b&&(!x.done||mealDatesOf(x).includes(ds)));
@@ -1440,7 +1442,10 @@ async function addAllMissing(){
   const t=iso(today()),jobs=[],newId=col=>db?db.collection(col).doc().id:'l'+Math.random().toString(36).slice(2);
   let n=0,shared=0;const now=Date.now();
   for(const ds of weekMenuDays().filter(x=>x>=t)){
-    for(const ing of missingFor(ds)){
+    const miss=missingFor(ds);if(!miss.length)continue;
+    const meal=S.meals.find(x=>x.id===ds);if(meal)meal.listed=true;
+    jobs.push(['update','meals',ds,{listed:true}]);
+    for(const ing of miss){
       const b=baseName(ing);
       const open=S.shopping.find(x=>!x.done&&baseName(x.name)===b);
       if(open){const nd=[...mealDatesOf(open),ds].sort();open.mealDates=nd;jobs.push(['update','shopping',open.id,{mealDates:nd,mealDate:null}]);shared++;continue}
@@ -1605,7 +1610,7 @@ async function applyMenu(prefix=''){
       if(!r){const id=newId('recipes'),data={name:m.dish,ingredients:names};S.recipes.push({id,...data});jobs.push(['set','recipes',id,data])}
       else if(JSON.stringify(r.ingredients||[])!==JSON.stringify(names)){r.ingredients=names;jobs.push(['update','recipes',r.id,{ingredients:names}])}
     }
-    const meal={name:m.dish,ingredients:names,cook:m.leftover?null:cookOn(ds),double:!!m.double};
+    const meal={name:m.dish,ingredients:names,cook:m.leftover?null:cookOn(ds),double:!!m.double,listed:true};
     S.meals=S.meals.filter(x=>x.id!==ds);S.meals.push({id:ds,...meal});jobs.push(['set','meals',ds,meal]);
     names.forEach((ing,k)=>{
       const b=baseName(ing);
