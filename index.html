@@ -207,6 +207,27 @@ h1{font:700 clamp(28px,6vw,40px)/1.05 var(--display);margin:4px 0 0;letter-spaci
 .cook[aria-pressed="true"][data-p="ida"]{background:var(--ida);border-color:var(--ida);color:var(--surface)}
 .wk-menu li{display:flex;align-items:center;gap:6px}
 .wk-menu li > button{flex:1;min-width:0}
+.wk-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;border:0;background:transparent;padding:0;text-align:left;color:inherit}
+.wk-toggle .chev{width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin:0 6px 4px;transition:transform .15s;flex:none}
+.wk-toggle[aria-expanded="true"] .chev{transform:rotate(-135deg);margin:4px 6px 0}
+#wk-peek{font-size:13px;color:var(--muted)}
+.wk-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--muted)}
+.dinner .go{margin-left:auto;color:var(--muted);font-size:18px;line-height:1}
+.rcp-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:14px 0}
+.rcp-actions .spacer{flex:1}
+.rcp-note{background:var(--today);border-radius:10px;padding:10px 12px;margin:12px 0;font-size:15px}
+.rcp-sec{margin-top:18px}
+.rcp-sec h4{margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.rcp-ing{list-style:none;margin:0;padding:6px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;columns:2 14em;column-gap:24px;font-size:16px}
+.rcp-ing li{padding:5px 0;break-inside:avoid}
+.rcp-steps{margin:0;padding:0;list-style:none;counter-reset:st;display:grid;gap:10px}
+.rcp-steps li{counter-increment:st;display:grid;grid-template-columns:2em minmax(0,1fr);gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:17px;line-height:1.5;cursor:pointer}
+.rcp-steps li::before{content:counter(st);font:700 20px var(--display);color:var(--accent);line-height:1.3}
+.rcp-steps li.done{opacity:.45}
+.rcp-empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:16px;margin-top:18px}
+.rcp-empty p{margin:0;color:var(--muted)}
+.rcp-foot{justify-content:center;gap:18px;margin-top:22px}
+.recipe .field{display:grid;gap:5px;margin-top:12px}
 .weekdiv{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-top:4px}
 .weekdiv::after{content:"";flex:1;height:1px;background:var(--line)}
 .day.today{background:var(--today);border-color:var(--accent);grid-column:1/-1}
@@ -356,13 +377,16 @@ textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;pa
         </div>
       </div>
       <div class="offers" id="offers" hidden>
-        <div class="offers-head">
-          <div class="offers-title"><strong>Ugens aftensmad</strong><span id="offers-meta"></span></div>
-          <button class="btn" id="suggest-menu" type="button">Foreslå menu</button>
+        <button class="wk-toggle" id="wk-toggle" type="button" aria-expanded="false" aria-controls="wk-body">
+          <span class="offers-title"><strong>Ugens aftensmad</strong><span id="wk-peek"></span></span>
+          <span class="chev" aria-hidden="true"></span>
+        </button>
+        <div id="wk-body" hidden>
+          <div class="wk-bar"><span id="offers-meta"></span><button class="btn" id="suggest-menu" type="button">Foreslå menu</button></div>
+          <ul class="wk-menu" id="wk-menu"></ul>
+          <button class="btn ghost wk-add" id="wk-add" type="button" hidden></button>
+          <details id="offers-details" hidden><summary id="offers-sum">Se tilbuddene</summary><ul class="offer-list" id="offers-list"></ul></details>
         </div>
-        <ul class="wk-menu" id="wk-menu"></ul>
-        <button class="btn ghost wk-add" id="wk-add" type="button" hidden></button>
-        <details id="offers-details" hidden><summary id="offers-sum">Se tilbuddene</summary><ul class="offer-list" id="offers-list"></ul></details>
       </div>
       <div class="days" id="days"></div>
     </section>
@@ -455,6 +479,15 @@ textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;pa
       <button type="submit" class="btn">Gem</button>
     </div>
   </form>
+</div>
+
+<!-- recipe page -->
+<div class="store recipe" id="rcp" hidden role="dialog" aria-labelledby="rcp-h">
+  <div class="store-bar">
+    <div class="store-title"><h3 id="rcp-h"></h3><span id="rcp-meta"></span></div>
+    <button class="btn ghost" id="rcp-close" type="button">Luk</button>
+  </div>
+  <div class="store-body" id="rcp-body"></div>
 </div>
 
 <!-- in-store shopping list -->
@@ -778,6 +811,7 @@ function render(){
   $('today-line').textContent='Uge '+isoWeek(t)+' · '+DL[dow(t)]+' '+t.getDate()+' '+MO[t.getMonth()];
   $('baby-age').textContent=babyAge();
   renderOffers();renderWeek();renderShop();renderChores();renderSummary();
+  if(!$('rcp').hidden)renderRecipe();
 }
 function renderSummary(){
   if(!loaded){$('summary').textContent='Indlæser tavlen…';return}
@@ -819,7 +853,7 @@ function renderWeek(){
         h('div',{class:'abody'},
           hol.length?h('div',{class:'holiday'},hol.map(x=>x.title).join(' · ')):null,
           evs.length?h('ul',{class:'items'},evs.map(evRow)):(!m&&!hol.length?h('p',{class:'empty'},CAL.ready||!mcp?'–':'…'):null),
-          wd<5?h('button',{class:'amenu'+(m?'':' empty'),type:'button',onclick:()=>openMeal(ds)},m?'Aftensmad: '+m.name+(cookOn(ds)?' · '+PEOPLE[cookOn(ds)].name+' laver mad':''):'+ Planlæg aftensmad'):null),
+          wd<5?h('button',{class:'amenu'+(m?'':' empty'),type:'button',onclick:()=>openDinner(ds)},m?'Aftensmad: '+m.name+(cookOn(ds)?' · '+PEOPLE[cookOn(ds)].name+' laver mad':''):'+ Planlæg aftensmad'):null),
         mcp?h('button',{class:'icon-btn',type:'button','aria-label':'Tilføj aftale '+DL[wd].toLowerCase()+' '+d.getDate()+'.',onclick:()=>openEvent(null,ds)},'+'):h('span'));
     });
     $('days').replaceChildren(h('div',{class:'agenda'},...rows));
@@ -1027,7 +1061,7 @@ $('ch-form').addEventListener('submit',async ev=>{
 function closeSheets(){$('ev-sheet').hidden=true;$('ch-sheet').hidden=true;$('ml-sheet').hidden=true;editingEv=editingCh=null;mealDate=null}
 $('ev-cancel').onclick=closeSheets;$('ch-cancel').onclick=closeSheets;$('ml-cancel').onclick=closeSheets;
 ['ev-sheet','ch-sheet','ml-sheet'].forEach(id=>$(id).addEventListener('click',e=>{if(e.target.id===id)closeSheets()}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSheets();$('qa-sheet').hidden=true;if(!$('store').hidden)closeStore();if(!menuBusy)$('mn-sheet').hidden=true}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSheets();$('qa-sheet').hidden=true;if(!$('store').hidden)closeStore();if(!$('rcp').hidden)closeRecipe();if(!menuBusy)$('mn-sheet').hidden=true}});
 $('add-ev').onclick=()=>openEvent(null);
 $('add-chore').onclick=()=>openChore(null);
 $('prev').onclick=()=>{weekOffset--;watchWeek()};
@@ -1053,8 +1087,8 @@ function cookChips(ds){
 function dinnerRow(ds){
   const m=mealOn(ds);
   return h('div',{class:'dinner-wrap'},
-    h('button',{class:'dinner'+(m?'':' empty'),type:'button',onclick:()=>openMeal(ds)},
-      h('span',{class:'dl'},'Aftensmad'),h('span',{class:'dn'},m?m.name:'Planlæg aftensmad')),
+    h('button',{class:'dinner'+(m?'':' empty'),type:'button',onclick:()=>openDinner(ds)},
+      h('span',{class:'dl'},'Aftensmad'),h('span',{class:'dn'},m?m.name:'Planlæg aftensmad'),m&&!isLeftover(m)?h('span',{class:'go','aria-hidden':'true'},'›'):null),
     isLeftover(m)?null:cookChips(ds));
 }
 let mealDate=null;
@@ -1216,6 +1250,12 @@ function renderOffers(){
   }else if(o&&Array.isArray(o.items)&&o.items.length)meta.textContent='Tilbuddene er fra en tidligere uge og bruges ikke';
   else meta.textContent=sample?'Claude kan foreslå retter til ugens hverdage':'Tryk på en dag for at planlægge';
   renderWeekMenu();
+  const open=isWkOpen();
+  $('wk-body').hidden=!open;$('wk-toggle').setAttribute('aria-expanded',String(open));
+  const days=weekMenuDays(),t=iso(today()),tn=days.includes(t)?mealOn(t):null;
+  const planned=days.filter(ds=>mealOn(ds)).length,miss=days.filter(ds=>ds>=t).reduce((a,ds)=>a+missingFor(ds).length,0);
+  $('wk-peek').hidden=open;
+  $('wk-peek').textContent=(tn?'I aften: '+tn.name+(cookOn(t)?' ('+PEOPLE[cookOn(t)].name+')':''):planned+' af '+days.length+' dage planlagt')+(miss?' · '+miss+(miss===1?' vare mangler':' varer mangler'):'');
   const det=$('offers-details');det.hidden=!(items.length&&fresh);
   if(!det.hidden)$('offers-list').replaceChildren(...items.map(x=>h('li',null,h('span',{class:'st'},x.store),h('span',{class:'nm'},x.name),h('span',{class:'pr'},x.price!=null?String(x.price).replace('.',',')+' kr':''))));
 }
@@ -1237,7 +1277,7 @@ function renderWeekMenu(){
   const days=weekMenuDays(),t=iso(today());
   $('wk-menu').replaceChildren(...days.map(ds=>{
     const d=parse(ds),m=mealOn(ds),miss=ds>=t?missingFor(ds).length:0,left=m&&/^Rester/.test(m.name);
-    return h('li',null,h('button',{type:'button',onclick:()=>openMeal(ds)},
+    return h('li',null,h('button',{type:'button',onclick:()=>openDinner(ds)},
       h('span',{class:'d'},DS[dow(d)]+' '+d.getDate()),
       h('span',{class:'n'+(m?(left?' left':''):' none')},m?m.name:'Ikke planlagt'),
       miss?h('span',{class:'miss'},miss+' mangler'):h('span')),
@@ -1380,7 +1420,7 @@ async function applyMenu(){
       if(!r){const id=newId('recipes'),data={name:m.dish,ingredients:names};S.recipes.push({id,...data});jobs.push(['set','recipes',id,data])}
       else if(JSON.stringify(r.ingredients||[])!==JSON.stringify(names)){r.ingredients=names;jobs.push(['update','recipes',r.id,{ingredients:names}])}
     }
-    const meal={name:m.dish,ingredients:names,cook:m.leftover?null:cookOn(ds)};
+    const meal={name:m.dish,ingredients:names,cook:m.leftover?null:cookOn(ds),double:!!m.double};
     S.meals=S.meals.filter(x=>x.id!==ds);S.meals.push({id:ds,...meal});jobs.push(['set','meals',ds,meal]);
     names.forEach((ing,k)=>{
       const b=baseName(ing);
@@ -1397,6 +1437,7 @@ async function applyMenu(){
     });
   }
   menuSug=[];
+  wkOpen=false;try{localStorage.setItem('fb-wk-open','0')}catch(e){}
   render();
   toast(chosen.length+(chosen.length===1?' ret':' retter')+' planlagt. '+n+(n===1?' vare':' varer')+' sat på indkøbslisten'+(shared?', '+shared+' stod der allerede.':'.'),6000);
   await runJobs(jobs);
@@ -1507,6 +1548,107 @@ async function classifyUnknown(){
     }
   }catch(e){}finally{classifying=false}
 }
+/* ---------- ugens aftensmad: fold in and out (remembered on this device) ---------- */
+let wkOpen=null;
+try{const v=localStorage.getItem('fb-wk-open');if(v!==null)wkOpen=v==='1'}catch(e){}
+function isWkOpen(){
+  if(wkOpen!==null)return wkOpen;
+  const t=iso(today());return weekMenuDays().filter(ds=>ds>=t).some(ds=>!mealOn(ds));
+}
+$('wk-toggle').onclick=()=>{wkOpen=!isWkOpen();try{localStorage.setItem('fb-wk-open',wkOpen?'1':'0')}catch(e){}renderOffers()};
+
+/* ---------- opskrifter ---------- */
+const recipeFor=name=>S.recipes.find(r=>(r.name||'').toLowerCase()===(name||'').toLowerCase());
+let rcpDate=null,rcpEditing=false,rcpBusy=false,rcpDone=new Set();
+function openDinner(ds){const m=mealOn(ds);if(m&&!isLeftover(m))openRecipe(ds);else openMeal(ds)}
+function openRecipe(ds){
+  rcpDate=ds;rcpEditing=false;rcpBusy=false;rcpDone=new Set();
+  $('rcp').hidden=false;document.body.style.overflow='hidden';
+  renderRecipe();$('rcp-body').scrollTop=0;
+  try{navigator.wakeLock&&navigator.wakeLock.request('screen').then(l=>{wakeLock=l}).catch(()=>{})}catch(e){}
+}
+function closeRecipe(){
+  $('rcp').hidden=true;document.body.style.overflow='';rcpDate=null;rcpEditing=false;
+  try{wakeLock&&wakeLock.release()}catch(e){}wakeLock=null;
+}
+$('rcp-close').onclick=closeRecipe;
+const cleanSteps=text=>text.split('\n').map(l=>l.replace(/^\s*(\d+\s*[.):-]|[-•*])\s*/,'').trim()).filter(Boolean);
+function renderRecipe(){
+  if($('rcp').hidden||!rcpDate||rcpEditing)return;
+  const ds=rcpDate,m=mealOn(ds);
+  if(!m){closeRecipe();return}
+  const r=recipeFor(m.name)||{},d=parse(ds),ck=cookOn(ds);
+  $('rcp-h').textContent=m.name;
+  $('rcp-meta').textContent=DL[dow(d)]+' '+d.getDate()+'. '+MO[d.getMonth()].slice(0,3)+(r.time?' · '+r.time:'')+(ck?' · '+PEOPLE[ck].name+' laver mad':'');
+  const ings=(m.ingredients&&m.ingredients.length?m.ingredients:r.ingredients)||[];
+  const steps=Array.isArray(r.steps)?r.steps:[];
+  const body=[h('div',{class:'rcp-actions'},cookChips(ds),h('span',{class:'spacer'}),
+    h('button',{class:'btn ghost',type:'button',onclick:()=>{closeRecipe();openMeal(ds)}},'Ret aftensmad'))];
+  if(m.double)body.push(h('p',{class:'rcp-note'},'Dobbelt portion – halvdelen er til rester i morgen.'));
+  if(ings.length)body.push(h('section',{class:'rcp-sec'},h('h4',null,'Ingredienser'),h('ul',{class:'rcp-ing'},ings.map(i=>h('li',null,i)))));
+  if(rcpBusy)body.push(h('p',{class:'store-empty'},'Claude skriver opskriften…'));
+  else if(steps.length){
+    body.push(h('section',{class:'rcp-sec'},h('h4',null,'Sådan gør du'),
+      h('ol',{class:'rcp-steps'},steps.map((st,i)=>h('li',{class:rcpDone.has(i)?'done':'',onclick:()=>{rcpDone.has(i)?rcpDone.delete(i):rcpDone.add(i);renderRecipe()}},h('span',null,st))))));
+    if(r.tip)body.push(h('p',{class:'rcp-note'},r.tip));
+  }else{
+    body.push(h('div',{class:'rcp-empty'},h('p',null,'Der er ingen fremgangsmåde til denne ret endnu.'),
+      h('div',{class:'rcp-actions'},sample?h('button',{class:'btn',type:'button',onclick:genRecipe},'Lav opskrift med Claude'):null,
+        h('button',{class:'btn ghost',type:'button',onclick:editRecipe},'Skriv den selv'))));
+  }
+  if(r.link&&/^https?:\/\//i.test(r.link))body.push(h('p',null,h('a',{class:'gcal-link',href:r.link,target:'_blank',rel:'noopener'},'Åbn den originale opskrift ↗')));
+  if(steps.length&&!rcpBusy)body.push(h('div',{class:'rcp-actions rcp-foot'},
+    h('button',{class:'linkbtn',type:'button',onclick:editRecipe},'Rediger opskrift'),
+    sample?h('button',{class:'linkbtn',type:'button',onclick:genRecipe},'Lav en ny med Claude'):null));
+  $('rcp-body').replaceChildren(...body);
+}
+function editRecipe(){
+  const m=mealOn(rcpDate);if(!m)return;const r=recipeFor(m.name)||{};
+  rcpEditing=true;
+  $('rcp-body').replaceChildren(
+    h('label',{class:'field'},h('span',null,'Tid'),h('input',{type:'text',id:'rcp-time',placeholder:'fx 35 min'})),
+    h('label',{class:'field'},h('span',null,'Fremgangsmåde – ét trin per linje'),h('textarea',{id:'rcp-steps',rows:'12',placeholder:'Indsæt eller skriv opskriften her'})),
+    h('label',{class:'field'},h('span',null,'Link til opskriften (valgfrit)'),h('input',{type:'url',id:'rcp-link',placeholder:'https://…'})),
+    h('div',{class:'actions'},h('span',{class:'spacer'}),
+      h('button',{class:'btn ghost',type:'button',onclick:()=>{rcpEditing=false;renderRecipe()}},'Annuller'),
+      h('button',{class:'btn',type:'button',onclick:saveRecipeEdit},'Gem opskrift')));
+  $('rcp-time').value=r.time||'';$('rcp-steps').value=(r.steps||[]).join('\n');$('rcp-link').value=r.link||'';
+  setTimeout(()=>$('rcp-steps').focus(),30);
+}
+async function saveRecipe(name,ings,fields){
+  const r=recipeFor(name);
+  if(r){Object.assign(r,fields);renderRecipe();await upd('recipes',r.id,fields)}
+  else{await add('recipes',{name,ingredients:ings||[],...fields});renderRecipe()}
+}
+async function saveRecipeEdit(){
+  const m=mealOn(rcpDate);if(!m)return;
+  const steps=cleanSteps($('rcp-steps').value),time=$('rcp-time').value.trim().slice(0,30),link=$('rcp-link').value.trim();
+  if(link&&!/^https?:\/\/\S+$/i.test(link)){toast('Linket skal starte med https://');return}
+  rcpEditing=false;
+  await saveRecipe(m.name,m.ingredients,{steps,time,link});
+  toast('Opskriften er gemt.');
+}
+async function genRecipe(){
+  const ds=rcpDate,m=mealOn(ds);if(!m||!sample||rcpBusy)return;
+  rcpBusy=true;renderRecipe();
+  const prompt=['Skriv en opskrift på "'+m.name+'" som aftensmad til to voksne'+(m.double?', men lav dobbelt portion – halvdelen gemmes til rester dagen efter':'')+'.',
+    m.ingredients&&m.ingredients.length?'Brug disse ingredienser, som familien har købt ind: '+m.ingredients.join(', ')+'. Du må også bruge salt, peber, olie og vand.':'',
+    'Svar kun med JSON: {"time":"ca. 35 min","steps":["..."],"tip":"..."}. 4–9 korte trin i bydeform på dansk med mængder, temperaturer og tider. "tip" er ét kort råd eller null.'].filter(Boolean).join('\n');
+  try{
+    const res=await sample.json(prompt,{modelTier:'default'});sampleOk=true;
+    const steps=res&&Array.isArray(res.steps)?res.steps.filter(x=>typeof x==='string'&&x.trim()).map(x=>x.trim()).slice(0,15):[];
+    if(!steps.length)throw{code:'empty'};
+    rcpBusy=false;
+    await saveRecipe(m.name,m.ingredients,{steps,time:typeof res.time==='string'?res.time.slice(0,30):'',tip:typeof res.tip==='string'?res.tip.slice(0,300):''});
+  }catch(e){
+    rcpBusy=false;renderRecipe();
+    const code=e&&e.code;
+    if(code==='not_granted'){sample=null;renderRecipe();toast('Claude er slået fra for denne tavle.')}
+    else if(code==='rate_limited')toast('For mange forespørgsler lige nu. Prøv igen om et minut.');
+    else if(code!=='cancelled')toast('Claude kunne ikke skrive opskriften lige nu. Prøv igen.');
+  }
+}
+
 $('open-store').onclick=openStore;
 function hideClearConfirm(){$('clear-confirm').hidden=true;$('clear-all').hidden=false}
 $('clear-all').onclick=()=>{$('clear-all').hidden=true;$('clear-confirm').hidden=false;$('clear-no').focus()};
@@ -1650,6 +1792,7 @@ $('add-ev').hidden=true;
 render();
 let started=false;
 /* Who may open the board is decided by firestore.rules alone: reading the calendar settings
+
    either works (a family account) or is refused. */
 auth.onAuthStateChanged(async u=>{
   $('signout').hidden=!u;
