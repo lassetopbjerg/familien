@@ -1,0 +1,113 @@
+{
+  "week": "2026-W41",
+  "weekStart": "2026-10-05",
+  "generated": "2026-09-28T15:07:58+02:00",
+  "offers": {
+    "items": [],
+    "sources": [
+      "https://www.tilbudmaskine.dk/netto/",
+      "https://www.tilbudmaskine.dk/rema-1000/",
+      "https://etilbudsavis.dk/Netto",
+      "https://etilbudsavis.dk/REMA-1000",
+      "https://www.kimbino.dk/netto/",
+      "https://www.kimbino.dk/rema-1000/"
+    ],
+    "validFrom": "2026-10-05",
+    "validTo": "2026-10-09"
+  },
+  "dishes": [
+    {
+      "dish": "Kylling i karry med ris",
+      "why": "Ingen tilbudsavis for uge 41 var offentliggjort endnu, så retten er valgt for variation og nem hverdagsmad.",
+      "ingredients": [
+        {"name": "Kyllingebryst (500 g)", "offer": null, "kr": 45},
+        {"name": "Ris (300 g)", "offer": null, "kr": 10},
+        {"name": "Løg (2 stk)", "offer": null, "kr": 5},
+        {"name": "Karry (2 tsk)", "offer": null, "kr": 2},
+        {"name": "Kokosmælk (1 dåse)", "offer": null, "kr": 12},
+        {"name": "Bouillon (1 tsk)", "offer": null, "kr": 2},
+        {"name": "Æble (1 stk)", "offer": null, "kr": 4},
+        {"name": "Persille (1 bundt)", "offer": null, "kr": 10}
+      ]
+    },
+    {
+      "dish": "Spaghetti bolognese",
+      "why": "Klassisk hverdagsret der er nem at lave i en stor portion og smager godt som rester.",
+      "ingredients": [
+        {"name": "Hakket oksekød (500 g)", "offer": null, "kr": 40},
+        {"name": "Spaghetti (500 g)", "offer": null, "kr": 12},
+        {"name": "Hakkede tomater (2 dåser)", "offer": null, "kr": 16},
+        {"name": "Løg (1 stk)", "offer": null, "kr": 3},
+        {"name": "Hvidløg (2 fed)", "offer": null, "kr": 2},
+        {"name": "Tomatpuré (1 tube)", "offer": null, "kr": 8},
+        {"name": "Revet parmesan (100 g)", "offer": null, "kr": 15},
+        {"name": "Gulerod (2 stk)", "offer": null, "kr": 5}
+      ]
+    },
+    {
+      "dish": "Ovnbagt torsk med kartofler og remoulade",
+      "why": "Let og hurtig fiskeret der giver variation i ugens menu.",
+      "ingredients": [
+        {"name": "Torskefilet (500 g)", "offer": null, "kr": 60},
+        {"name": "Kartofler (800 g)", "offer": null, "kr": 12},
+        {"name": "Remoulade (1 glas)", "offer": null, "kr": 15},
+        {"name": "Citron (1 stk)", "offer": null, "kr": 5},
+        {"name": "Smør (50 g)", "offer": null, "kr": 5},
+        {"name": "Persille (1 bundt)", "offer": null, "kr": 10},
+        {"name": "Salatblade (1 pose)", "offer": null, "kr": 12}
+      ]
+    },
+    {
+      "dish": "Grøntsagssuppe med røde linser",
+      "why": "Varm og mættende vegetarisk suppe, der er nem at varme som rester senere i ugen.",
+      "ingredients": [
+        {"name": "Røde linser (250 g)", "offer": null, "kr": 12},
+        {"name": "Gulerod (3 stk)", "offer": null, "kr": 6},
+        {"name": "Selleri (1 stk)", "offer": null, "kr": 8},
+        {"name": "Løg (1 stk)", "offer": null, "kr": 3},
+        {"name": "Hakkede tomater (1 dåse)", "offer": null, "kr": 8},
+        {"name": "Grøntsagsbouillon (1 tsk)", "offer": null, "kr": 3},
+        {"name": "Fløde (1 dl)", "offer": null, "kr": 6},
+        {"name": "Brød (1 stk)", "offer": null, "kr": 20}
+      ]
+    },
+    {
+      "dish": "Stegt flæsk med persillesovs og kartofler",
+      "why": "Dansk klassiker der giver variation med svinekød midt i ugen.",
+      "ingredients": [
+        {"name": "Stegeflæsk (600 g)", "offer": null, "kr": 45},
+        {"name": "Kartofler (1 kg)", "offer": null, "kr": 15},
+        {"name": "Mælk (5 dl)", "offer": null, "kr": 6},
+        {"name": "Persille (1 bundt)", "offer": null, "kr": 10},
+        {"name": "Smør (30 g)", "offer": null, "kr": 3},
+        {"name": "Hvedemel (2 spsk)", "offer": null, "kr": 2}
+      ]
+    },
+    {
+      "dish": "Kylling i fad med peberfrugt og løg",
+      "why": "Nem fadret med kylling og grøntsager, hurtig at samle på en hverdagsaften.",
+      "ingredients": [
+        {"name": "Kyllingelår (6 stk)", "offer": null, "kr": 40},
+        {"name": "Peberfrugt (2 stk)", "offer": null, "kr": 12},
+        {"name": "Løg (2 stk)", "offer": null, "kr": 5},
+        {"name": "Hvidløg (2 fed)", "offer": null, "kr": 2},
+        {"name": "Olivenolie (2 spsk)", "offer": null, "kr": 3},
+        {"name": "Paprika (1 tsk)", "offer": null, "kr": 2},
+        {"name": "Ris eller couscous (300 g)", "offer": null, "kr": 10}
+      ]
+    },
+    {
+      "dish": "Pasta med tun, oliven og cherrytomater",
+      "why": "Hurtig fiskepasta til en travl hverdagsaften, klar på under 30 minutter.",
+      "ingredients": [
+        {"name": "Pasta (500 g)", "offer": null, "kr": 12},
+        {"name": "Tun i vand (2 dåser)", "offer": null, "kr": 20},
+        {"name": "Cherrytomater (250 g)", "offer": null, "kr": 15},
+        {"name": "Oliven (100 g)", "offer": null, "kr": 12},
+        {"name": "Hvidløg (2 fed)", "offer": null, "kr": 2},
+        {"name": "Olivenolie (2 spsk)", "offer": null, "kr": 3},
+        {"name": "Basilikum (1 bundt)", "offer": null, "kr": 10}
+      ]
+    }
+  ]
+}
