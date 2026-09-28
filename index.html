@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#2B8A62">
+<meta name="theme-color" content="#2C7A5F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Familien">
 <link rel="manifest" href="manifest.json">
@@ -14,36 +14,31 @@
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap">
 <style>
-/* Hjemlig stil: calm neutrals, the app icon's green as the one accent, each person's colour for what is theirs. */
 :root{
-  --bg:#F4F5F2; --surface:#FFFFFF; --sunk:#ECEFEA; --ink:#1F2A25; --muted:#66716B; --line:#E2E6E0;
-  --accent:#2B8A62; --accent-ink:#FFFFFF; --today:#E4F3EA;
-  --lasse:#3474D4; --ida:#D2457A; --ubbe:#D9960F; --danger:#C0392B;
-  --lasse-bg:#E6EEFC; --ida-bg:#FCE8F0; --ubbe-bg:#FFF3D6;
-  --shadow:0 12px 32px rgba(25,40,32,.16);
-  --r-lg:20px; --r-md:14px; --r-sm:10px;
-  --display:"Fredoka", "Nunito", "Segoe UI", system-ui, sans-serif;
-  --body:"Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --bg:#F1F4F1; --surface:#FFFFFF; --sunk:#E6ECE8; --ink:#1B2521; --muted:#5B6964; --line:#D6DED9;
+  --accent:#2C7A5F; --accent-ink:#FFFFFF; --today:#E1EFE8;
+  --lasse:#2E6BB0; --ida:#BE3F68; --ubbe:#B97F0C; --danger:#B3261E;
+  --shadow:0 10px 30px rgba(20,40,32,.18);
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --bg:#111513; --surface:#1A201D; --sunk:#222924; --ink:#E6ECE8; --muted:#9AA59F; --line:#2B332E;
-    --accent:#5CC495; --accent-ink:#0C1A13; --today:#1C2D24;
-    --lasse:#86AEF2; --ida:#F286AE; --ubbe:#F0C35C; --danger:#F08A80;
-    --lasse-bg:#1D2940; --ida-bg:#3A2130; --ubbe-bg:#372D17;
-    --shadow:0 12px 32px rgba(0,0,0,.5);
+    --bg:#0F1513; --surface:#172019; --sunk:#1F2A25; --ink:#E3EBE7; --muted:#93A39C; --line:#2A3631;
+    --accent:#5CBB93; --accent-ink:#0B1712; --today:#1B2D25;
+    --lasse:#72A8E8; --ida:#EC82A4; --ubbe:#E6B64E; --danger:#F08A80;
+    --shadow:0 10px 30px rgba(0,0,0,.5);
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#111513; --surface:#1A201D; --sunk:#222924; --ink:#E6ECE8; --muted:#9AA59F; --line:#2B332E;
-  --accent:#5CC495; --accent-ink:#0C1A13; --today:#1C2D24;
-  --lasse:#86AEF2; --ida:#F286AE; --ubbe:#F0C35C; --danger:#F08A80;
-  --lasse-bg:#1D2940; --ida-bg:#3A2130; --ubbe-bg:#372D17;
-  --shadow:0 12px 32px rgba(0,0,0,.5);
+  --bg:#0F1513; --surface:#172019; --sunk:#1F2A25; --ink:#E3EBE7; --muted:#93A39C; --line:#2A3631;
+  --accent:#5CBB93; --accent-ink:#0B1712; --today:#1B2D25;
+  --lasse:#72A8E8; --ida:#EC82A4; --ubbe:#E6B64E; --danger:#F08A80;
+  --shadow:0 10px 30px rgba(0,0,0,.5);
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--body)}
@@ -339,124 +334,6 @@ textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;pa
 .linkbtn[disabled]{opacity:.6;cursor:default}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;z-index:30;max-width:calc(100% - 32px);font-size:14px;box-shadow:var(--shadow)}
 @media (prefers-reduced-motion:no-preference){.sheet{animation:up .18s ease-out}@keyframes up{from{transform:translateY(12px);opacity:.6}}}
-
-/* ---------- Hjemlig stil (2026-09-28) ----------
-   One layer on top of the rules above: friendlier type, softer shapes, calmer surfaces.
-   Layout and controls stay where they were. The previous look is git tag "foer-nyt-design". */
-body{font:600 15.5px/1.5 var(--body);-webkit-font-smoothing:antialiased}
-strong,b{font-weight:800}
-h1{font:700 clamp(26px,6.5vw,36px)/1.05 var(--display);letter-spacing:0}
-.eyebrow{font:500 14px var(--display);letter-spacing:0;text-transform:none;color:var(--muted)}
-.panel h2,.sheet h3,.store-title h3{font-family:var(--display);font-weight:600;letter-spacing:0}
-.sub-h,.qa-label,.cat h4,.rcp-sec h4,.mn-day,.qa-kind,.tag,.dinner .dl,.adate .ad,.wk-menu .d,.mn-row .d{font-family:var(--display);font-weight:600;letter-spacing:.04em}
-.baby{background:var(--ubbe-bg);border:0;padding:5px 14px 5px 5px;font-weight:700}
-.baby .dot{width:28px;height:28px;font-size:14px}
-.summary{margin:0 0 14px}
-
-/* surfaces */
-.card,.day,.agenda,.offers,.qa,.calbox,.cat ul,.mn-rows,.rcp-ing,.rcp-empty{border-radius:var(--r-lg);border-color:var(--line)}
-.sheet{border-radius:24px}
-.login-card{border-radius:24px}
-.note,.toast,.total,.rcp-note,.offer{border-radius:var(--r-md)}
-.day{padding:12px 14px 14px;gap:8px}
-.day.today{border-width:2px}
-.dinner{border-radius:var(--r-md);padding:8px 10px}
-.rcp-steps li{border-radius:var(--r-md)}
-
-/* controls */
-.btn{border-radius:var(--r-md);font:600 15px var(--display);padding:10px 16px}
-.btn.ghost{border:1.5px solid var(--line)}
-.icon-btn{border-radius:12px;border:1.5px solid var(--line)}
-input[type=text],input[type=date],input[type=time],input[type=url],select,textarea{border-radius:var(--r-md);border:1.5px solid var(--line);background:var(--bg)}
-input[type=text]:focus,input[type=url]:focus,textarea:focus,select:focus{border-color:var(--accent);outline:none}
-.tg{font-weight:700}
-.tg[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.cook{font-weight:700}
-.linkbtn{font-weight:700}
-
-/* segmented controls: section tabs and the quick-add kinds */
-.tabs{gap:4px;padding:4px;background:var(--sunk);border-radius:16px;margin-bottom:12px;top:calc(env(safe-area-inset-top,0px) + 6px)}
-.tab{border:0;background:transparent;border-radius:12px;font:600 15px var(--display);padding:9px 6px}
-.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
-.qa-modes{gap:6px}
-.qa-modes .tg{flex:1;justify-content:center;border:0;background:var(--sunk);color:var(--muted);border-radius:12px;font:600 14px var(--display);padding:8px 0}
-.qa-modes .tg[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
-.qa{padding:12px;gap:10px}
-.qa-label{font-size:13px}
-
-/* today at a glance */
-.glance{display:grid;gap:12px;margin-bottom:16px}
-.tonight{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 14px;align-items:center;width:100%;text-align:left;border:0;border-radius:var(--r-lg);padding:14px 16px;background:var(--today);color:var(--ink)}
-.tonight[data-p="lasse"]{background:var(--lasse-bg)}.tonight[data-p="ida"]{background:var(--ida-bg)}
-.tn-ic{grid-row:1/4;width:52px;height:52px;border-radius:16px;background:var(--surface);display:grid;place-items:center;color:var(--accent)}
-.tonight[data-p="lasse"] .tn-ic,.tonight[data-p="lasse"] .tn-lab{color:var(--lasse)}
-.tonight[data-p="ida"] .tn-ic,.tonight[data-p="ida"] .tn-lab{color:var(--ida)}
-.tn-ic svg{width:28px;height:28px}
-.tn-lab{font:600 12px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
-.tn-dish{font:700 20px/1.15 var(--display);overflow-wrap:anywhere}
-.tn-who{font-size:13.5px;color:var(--muted)}
-.tonight.empty .tn-dish{color:var(--muted);font-weight:600}
-.tonight:hover{filter:brightness(.98)}
-
-/* ---------- Hjemlig stil, round 2: the B layout ----------
-   Lifted white cards on a tinted ground, days as rows with a date badge, round checkboxes, colour pills. */
-:root{--bg:#EDF0EC; --sunk:#E4E8E2; --card-shadow:0 1px 2px rgba(25,40,32,.07),0 6px 16px rgba(25,40,32,.06)}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111513; --sunk:#222924; --card-shadow:0 1px 2px rgba(0,0,0,.45)}}
-:root[data-theme="dark"]{--bg:#111513; --sunk:#222924; --card-shadow:0 1px 2px rgba(0,0,0,.45)}
-.card,.day,.agenda,.offers,.qa,.calbox,.cat ul,.mn-rows,.rcp-ing,.rcp-steps li{border:0;box-shadow:var(--card-shadow)}
-.tonight{box-shadow:none}
-
-/* days */
-.days{gap:10px}
-.day{display:grid;grid-template-columns:3.4em minmax(0,1fr);gap:0 14px;align-items:stretch;padding:12px 14px}
-.day.today{background:var(--surface);border:0}
-.dbadge{display:grid;justify-items:center;align-content:center;align-self:start;background:var(--sunk);border-radius:14px;padding:7px 0 6px;line-height:1.1}
-.dbadge small{font:600 11px var(--display);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.dbadge b{font:700 22px var(--display);font-variant-numeric:tabular-nums}
-.day.today .dbadge{background:var(--accent);color:var(--accent-ink)}
-.day.today .dbadge small{color:inherit;opacity:.85}
-.day.weekend .dbadge{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line)}
-.dbody{display:grid;gap:4px;min-width:0;align-content:center}
-.day-head{align-items:center;gap:8px}
-.dname{font:600 12px var(--display);text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
-.day .empty{color:var(--muted);font-size:14px;align-self:center}
-
-/* the dinner: small label, the dish on its own line, who cooks underneath */
-.days{grid-template-columns:minmax(0,1fr)}
-.day.today .dname{font-size:12px}
-.dinner-wrap{flex-direction:column;align-items:flex-start;gap:6px}
-.dinner,.dinner:not(.empty){display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 8px;width:100%;border:0;background:transparent;padding:2px 0}
-.dinner .go{grid-row:1/3;grid-column:2;align-self:center;margin:0}
-.dinner .dl,.dinner .dn{grid-column:1}
-.dinner .dl{font:600 11px var(--display);color:var(--muted);letter-spacing:.06em}
-.dinner .dn{font:700 16px/1.3 var(--display)}
-.dinner.empty .dn{font:600 15px var(--body);color:var(--muted)}
-.dinner:hover .dn{color:var(--accent)}
-.cook{padding:3px 10px;border:1.5px solid var(--line)}
-
-/* chores: round checkboxes and colour pills */
-.items{gap:0}
-.check{padding:4px 0;gap:10px}
-.check label{font-weight:600}
-input[type=checkbox]{appearance:none;-webkit-appearance:none;width:22px;height:22px;flex:none;margin:0;border-radius:8px;border:2px solid var(--line);background:var(--surface);display:inline-grid;place-items:center;cursor:pointer;transition:background .12s,border-color .12s}
-input[type=checkbox]:checked{background:var(--accent);border-color:var(--accent)}
-input[type=checkbox]:checked::after{content:"";width:10px;height:5px;border-left:2.5px solid var(--accent-ink);border-bottom:2.5px solid var(--accent-ink);transform:translateY(-1px) rotate(-45deg)}
-.sitem input[type=checkbox]{width:26px;height:26px;border-radius:9px}
-.pill{border-radius:999px;padding:2px 10px;font:600 12px var(--display);background:var(--sunk);color:var(--muted)}
-.pill i{display:none}
-.pill[data-p="lasse"]{background:var(--lasse-bg);color:var(--lasse)}
-.pill[data-p="ida"]{background:var(--ida-bg);color:var(--ida)}
-
-/* week section: slim dinner overview above the days, calendar below them */
-.offers{padding:12px 14px}
-.offers-title strong{font:600 15px var(--display)}
-.maincol{display:grid;gap:28px;align-content:start;min-width:0}
-a.btn{text-decoration:none;display:inline-block}
-[data-panel="cal"] .phead .btn{padding:8px 14px}
-.calbox iframe{height:min(70vh,560px)}
-.tab{padding-inline:2px}
-.calhint{margin:0;padding:10px 12px}
-.weekdiv{margin-top:8px}
 </style>
 </head>
 <body>
@@ -488,33 +365,29 @@ a.btn{text-decoration:none;display:inline-block}
     <span class="hint" id="qa-hint">Skriv, eller tryk på mikrofonen på telefonens tastatur og sig det.</span>
   </form>
 
-  <!-- today at a glance: tonight's dinner in the cook's colour -->
-  <section class="glance" id="today-strip" hidden>
-    <button class="tonight" id="tonight" type="button">
-      <span class="tn-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M5 11v6a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-6"/><path d="M8 7c0-1.5 1-2 1-3M12 7c0-1.5 1-2 1-3M16 7c0-1.5 1-2 1-3"/></svg></span>
-      <span class="tn-lab">I aften</span>
-      <span class="tn-dish" id="tonight-dish"></span>
-      <span class="tn-who" id="tonight-who"></span>
-    </button>
-  </section>
-
   <nav class="tabs" role="tablist" aria-label="Sektioner">
     <button class="tab" role="tab" id="tab-week" data-tab="week" aria-selected="true">Uge</button>
-    <button class="tab" role="tab" id="tab-cal" data-tab="cal" aria-selected="false">Kalender</button>
     <button class="tab" role="tab" id="tab-shop" data-tab="shop" aria-selected="false">Indkøb <span class="n" id="n-shop"></span></button>
     <button class="tab" role="tab" id="tab-chores" data-tab="chores" aria-selected="false">Opgaver <span class="n" id="n-chores"></span></button>
   </nav>
 
   <div class="panels">
-    <div class="maincol">
     <section class="panel" data-panel="week">
       <div class="phead">
-        <h2>Ugen</h2>
+        <h2>Familiekalender</h2>
         <div class="weeknav">
           <button class="icon-btn" id="prev" aria-label="Forrige uge">‹</button>
           <div class="lbl" id="week-lbl">Fra i dag</div>
           <button class="icon-btn" id="next" aria-label="Næste uge">›</button>
           <button class="btn" id="add-ev">+ Aftale</button>
+        </div>
+      </div>
+      <div class="calbox">
+        <iframe id="cal-frame" title="Familiekalender" hidden></iframe>
+        <p class="hint" id="cal-note" hidden>Ingen kalender er sat op til tavlen endnu.</p>
+        <div class="calbar">
+          <span class="hint">Tom kalender? Log ind på Google i denne browser, eller åbn kalenderen direkte.</span>
+          <a class="btn ghost" href="https://calendar.google.com/calendar/r" target="_blank" rel="noopener">Åbn Google Kalender</a>
         </div>
       </div>
       <div class="offers" id="offers" hidden>
@@ -531,17 +404,6 @@ a.btn{text-decoration:none;display:inline-block}
       </div>
       <div class="days" id="days"></div>
     </section>
-
-    <!-- its own tab on phones; under the week on a computer -->
-    <section class="panel" data-panel="cal" data-hide="1">
-      <div class="phead"><h2>Kalender</h2><a class="btn ghost" href="https://calendar.google.com/calendar/r" target="_blank" rel="noopener">Åbn Google Kalender</a></div>
-      <div class="calbox">
-        <iframe id="cal-frame" title="Familiekalender" hidden></iframe>
-        <p class="hint" id="cal-note" hidden>Ingen kalender er sat op til tavlen endnu.</p>
-        <p class="hint calhint">Tom kalender? Log ind på Google i denne browser, eller brug knappen ovenfor.</p>
-      </div>
-    </section>
-    </div>
 
     <div class="side">
       <section class="panel" data-panel="shop" data-hide="1">
@@ -899,8 +761,8 @@ function h(tag,attrs,...kids){
   return e;
 }
 function personPill(p){
-  if(!PEOPLE[p])return h('span',{class:'pill','data-p':'any'},'Alle');
-  return h('span',{class:'pill','data-p':p},h('i',{style:'background:'+PEOPLE[p].c}),PEOPLE[p].name);
+  if(!PEOPLE[p])return h('span',{class:'pill'},'Alle');
+  return h('span',{class:'pill'},h('i',{style:'background:'+PEOPLE[p].c}),PEOPLE[p].name);
 }
 let toastT;
 function toast(msg,ms=3500){const t=$('toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,ms)}
@@ -965,21 +827,19 @@ function render(){
   renderOffers();renderWeek();renderShop();renderChores();renderSummary();
   if(!$('rcp').hidden)renderRecipe();
 }
-/* Today at a glance: the "I aften" card in the cook's colour, plus the counts on the section tabs. */
 function renderSummary(){
-  $('summary').hidden=loaded;$('today-strip').hidden=!loaded;
   if(!loaded){$('summary').textContent='Indlæser tavlen…';return}
   const t=today(),ds=iso(t);
-  const chs=choresOn(t),left=chs.filter(c=>!isDone(c,ds)).length,sh=S.shopping.filter(s=>!s.done).length;
-  const m=mealOn(ds),ck=cookOn(ds),miss=m?missingFor(ds).length:0;
-  const card=$('tonight');card.dataset.p=m&&ck?ck:'';card.classList.toggle('empty',!m);
-  $('tonight-dish').textContent=m?m.name:'Ingen aftensmad planlagt';
-  const who=m?[ck?PEOPLE[ck].name+' laver mad':isLeftover(m)?'Restedag':'Hvem laver mad?']:['Tryk for at planlægge'];
-  if(miss)who.push(' · '+miss+(miss===1?' vare mangler':' varer mangler'));
-  $('tonight-who').textContent=who.join('');
-  $('n-shop').textContent=sh?'· '+sh:'';$('n-chores').textContent=left?'· '+left:'';
+  const ch=choresOn(t).filter(c=>!isDone(c,ds)).length,sh=S.shopping.filter(s=>!s.done).length;
+  const tonight=mealOn(ds);
+  const ck=cookOn(ds);
+  const parts=tonight?['Aftensmad i aften: ',h('strong',null,tonight.name),ck?' ('+PEOPLE[ck].name+' laver mad)':'','. I dag: ']:['I dag: '];
+  if(weekOffset===0&&CAL.ready){const ev=eventsOn(t).length;parts.push(h('strong',null,ev===0?'intet i kalenderen':ev+' ting i kalenderen'),', ')}
+  parts.push(h('strong',null,ch===0?'alle opgaver klaret':ch+(ch===1?' opgave tilbage':' opgaver tilbage')),', ',
+    h('strong',null,sh+(sh===1?' vare':' varer')),' på indkøbslisten.');
+  $('summary').replaceChildren(...parts);
+  $('n-shop').textContent=sh?'· '+sh:'';$('n-chores').textContent=ch?'· '+ch:'';
 }
-$('tonight').onclick=()=>openDinner(iso(today()));
 function evRow(e){
   return h('li',null,h('button',{class:'ev',type:'button',onclick:()=>openEvent(e)},
     h('span',{class:'t'+(e.soft?' soft':'')},e.label||'–'),
@@ -1020,16 +880,15 @@ function renderWeek(){
     const ds=iso(d),isT=ds===iso(t),wd=dow(d);
     if(i>0&&wd===0)cards.push(h('div',{class:'weekdiv'},h('span',null,'Uge '+isoWeek(d))));
     const evs=CAL.ready?eventsOn(d):[],chs=choresOn(d),hol=holidaysOn(d);
-    /* one row per day: a date badge on the left, the day's dinner and chores on the right */
-    cards.push(h('section',{class:'day'+(isT?' today':'')+(wd>4?' weekend':''),'aria-label':(isT?'I dag, ':i===1?'I morgen, ':'')+DL[wd]+' '+d.getDate()+'. '+MO[d.getMonth()]},
-      h('div',{class:'dbadge','aria-hidden':'true'},h('small',null,DS[wd]),h('b',null,String(d.getDate()))),
-      h('div',{class:'dbody'},
-        isT||i===1||hol.length||mcp?h('div',{class:'day-head'},
-          isT||i===1?h('span',{class:'dname'},isT?'I dag':'I morgen'):null,
-          hol.length?h('span',{class:'holiday'},hol.map(x=>x.title).join(' · ')):null,
-          mcp&&h('button',{class:'icon-btn',type:'button','aria-label':'Tilføj aftale '+DL[wd].toLowerCase(),onclick:()=>openEvent(null,ds)},'+')):null,
-        wd<5?dinnerRow(ds):null,
-        evs.length||chs.length?h('ul',{class:'items'},evs.map(evRow),chs.map(c=>choreCheck(c,ds,'wk'))):wd<5?null:h('p',{class:'empty'},mcp&&!CAL.ready?'…':'Ingen opgaver'))));
+    cards.push(h('section',{class:'day'+(isT?' today':'')},
+      h('div',{class:'day-head'},
+        h('span',{class:'dname'},isT?'I dag':i===1?'I morgen':DL[wd]),
+        h('span',{class:'ddate'},d.getDate()+'. '+MO[d.getMonth()].slice(0,3)),
+        isT||i===1?h('span',{class:'tag'},DL[wd]):null,
+        mcp&&h('button',{class:'icon-btn',type:'button','aria-label':'Tilføj aftale '+DL[wd].toLowerCase(),onclick:()=>openEvent(null,ds)},'+')),
+      hol.length?h('div',{class:'holiday'},hol.map(x=>x.title).join(' · ')):null,
+      wd<5?dinnerRow(ds):null,
+      evs.length||chs.length?h('ul',{class:'items'},evs.map(evRow),chs.map(c=>choreCheck(c,ds,'wk'))):h('p',{class:'empty'},mcp&&!CAL.ready?'…':mcp?'Intet planlagt':'Ingen opgaver')));
   });
   $('days').replaceChildren(...cards);
 }
