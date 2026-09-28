@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#2C7A5F">
+<meta name="theme-color" content="#2B8A62">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Familien">
 <link rel="manifest" href="manifest.json">
@@ -14,31 +14,36 @@
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap">
 <style>
+/* Hjemlig stil: calm neutrals, the app icon's green as the one accent, each person's colour for what is theirs. */
 :root{
-  --bg:#F1F4F1; --surface:#FFFFFF; --sunk:#E6ECE8; --ink:#1B2521; --muted:#5B6964; --line:#D6DED9;
-  --accent:#2C7A5F; --accent-ink:#FFFFFF; --today:#E1EFE8;
-  --lasse:#2E6BB0; --ida:#BE3F68; --ubbe:#B97F0C; --danger:#B3261E;
-  --shadow:0 10px 30px rgba(20,40,32,.18);
-  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  --body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --bg:#F4F5F2; --surface:#FFFFFF; --sunk:#ECEFEA; --ink:#1F2A25; --muted:#66716B; --line:#E2E6E0;
+  --accent:#2B8A62; --accent-ink:#FFFFFF; --today:#E4F3EA;
+  --lasse:#3474D4; --ida:#D2457A; --ubbe:#D9960F; --danger:#C0392B;
+  --lasse-bg:#E6EEFC; --ida-bg:#FCE8F0; --ubbe-bg:#FFF3D6;
+  --shadow:0 12px 32px rgba(25,40,32,.16);
+  --r-lg:20px; --r-md:14px; --r-sm:10px;
+  --display:"Fredoka", "Nunito", "Segoe UI", system-ui, sans-serif;
+  --body:"Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --bg:#0F1513; --surface:#172019; --sunk:#1F2A25; --ink:#E3EBE7; --muted:#93A39C; --line:#2A3631;
-    --accent:#5CBB93; --accent-ink:#0B1712; --today:#1B2D25;
-    --lasse:#72A8E8; --ida:#EC82A4; --ubbe:#E6B64E; --danger:#F08A80;
-    --shadow:0 10px 30px rgba(0,0,0,.5);
+    --bg:#111513; --surface:#1A201D; --sunk:#222924; --ink:#E6ECE8; --muted:#9AA59F; --line:#2B332E;
+    --accent:#5CC495; --accent-ink:#0C1A13; --today:#1C2D24;
+    --lasse:#86AEF2; --ida:#F286AE; --ubbe:#F0C35C; --danger:#F08A80;
+    --lasse-bg:#1D2940; --ida-bg:#3A2130; --ubbe-bg:#372D17;
+    --shadow:0 12px 32px rgba(0,0,0,.5);
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#0F1513; --surface:#172019; --sunk:#1F2A25; --ink:#E3EBE7; --muted:#93A39C; --line:#2A3631;
-  --accent:#5CBB93; --accent-ink:#0B1712; --today:#1B2D25;
-  --lasse:#72A8E8; --ida:#EC82A4; --ubbe:#E6B64E; --danger:#F08A80;
-  --shadow:0 10px 30px rgba(0,0,0,.5);
+  --bg:#111513; --surface:#1A201D; --sunk:#222924; --ink:#E6ECE8; --muted:#9AA59F; --line:#2B332E;
+  --accent:#5CC495; --accent-ink:#0C1A13; --today:#1C2D24;
+  --lasse:#86AEF2; --ida:#F286AE; --ubbe:#F0C35C; --danger:#F08A80;
+  --lasse-bg:#1D2940; --ida-bg:#3A2130; --ubbe-bg:#372D17;
+  --shadow:0 12px 32px rgba(0,0,0,.5);
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--body)}
@@ -334,6 +339,73 @@ textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;pa
 .linkbtn[disabled]{opacity:.6;cursor:default}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;z-index:30;max-width:calc(100% - 32px);font-size:14px;box-shadow:var(--shadow)}
 @media (prefers-reduced-motion:no-preference){.sheet{animation:up .18s ease-out}@keyframes up{from{transform:translateY(12px);opacity:.6}}}
+
+/* ---------- Hjemlig stil (2026-09-28) ----------
+   One layer on top of the rules above: friendlier type, softer shapes, calmer surfaces.
+   Layout and controls stay where they were. The previous look is git tag "foer-nyt-design". */
+body{font:600 15.5px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+strong,b{font-weight:800}
+h1{font:700 clamp(26px,6.5vw,36px)/1.05 var(--display);letter-spacing:0}
+.eyebrow{font:500 14px var(--display);letter-spacing:0;text-transform:none;color:var(--muted)}
+.panel h2,.sheet h3,.store-title h3{font-family:var(--display);font-weight:600;letter-spacing:0}
+.sub-h,.qa-label,.cat h4,.rcp-sec h4,.mn-day,.qa-kind,.tag,.dinner .dl,.adate .ad,.wk-menu .d,.mn-row .d{font-family:var(--display);font-weight:600;letter-spacing:.04em}
+.baby{background:var(--ubbe-bg);border:0;padding:5px 14px 5px 5px;font-weight:700}
+.baby .dot{width:28px;height:28px;font-size:14px}
+.summary{margin:0 0 14px}
+
+/* surfaces */
+.card,.day,.agenda,.offers,.qa,.calbox,.cat ul,.mn-rows,.rcp-ing,.rcp-empty{border-radius:var(--r-lg);border-color:var(--line)}
+.sheet{border-radius:24px}
+.login-card{border-radius:24px}
+.note,.toast,.total,.rcp-note,.offer{border-radius:var(--r-md)}
+.day{padding:12px 14px 14px;gap:8px}
+.day.today{border-width:2px}
+.dinner{border-radius:var(--r-md);padding:8px 10px}
+.rcp-steps li{border-radius:var(--r-md)}
+
+/* controls */
+.btn{border-radius:var(--r-md);font:600 15px var(--display);padding:10px 16px}
+.btn.ghost{border:1.5px solid var(--line)}
+.icon-btn{border-radius:12px;border:1.5px solid var(--line)}
+input[type=text],input[type=date],input[type=time],input[type=url],select,textarea{border-radius:var(--r-md);border:1.5px solid var(--line);background:var(--bg)}
+input[type=text]:focus,input[type=url]:focus,textarea:focus,select:focus{border-color:var(--accent);outline:none}
+.tg{font-weight:700}
+.tg[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.cook{font-weight:700}
+.linkbtn{font-weight:700}
+
+/* segmented controls: section tabs and the quick-add kinds */
+.tabs{gap:4px;padding:4px;background:var(--sunk);border-radius:16px;margin-bottom:12px;top:calc(env(safe-area-inset-top,0px) + 6px)}
+.tab{border:0;background:transparent;border-radius:12px;font:600 15px var(--display);padding:9px 6px}
+.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.qa-modes{gap:6px}
+.qa-modes .tg{flex:1;justify-content:center;border:0;background:var(--sunk);color:var(--muted);border-radius:12px;font:600 14px var(--display);padding:8px 0}
+.qa-modes .tg[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.qa{padding:12px;gap:10px}
+.qa-label{font-size:13px}
+
+/* today at a glance */
+.glance{display:grid;gap:12px;margin-bottom:16px}
+.tonight{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 14px;align-items:center;width:100%;text-align:left;border:0;border-radius:var(--r-lg);padding:14px 16px;background:var(--today);color:var(--ink)}
+.tonight[data-p="lasse"]{background:var(--lasse-bg)}.tonight[data-p="ida"]{background:var(--ida-bg)}
+.tn-ic{grid-row:1/4;width:52px;height:52px;border-radius:16px;background:var(--surface);display:grid;place-items:center;color:var(--accent)}
+.tonight[data-p="lasse"] .tn-ic,.tonight[data-p="lasse"] .tn-lab{color:var(--lasse)}
+.tonight[data-p="ida"] .tn-ic,.tonight[data-p="ida"] .tn-lab{color:var(--ida)}
+.tn-ic svg{width:28px;height:28px}
+.tn-lab{font:600 12px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.tn-dish{font:700 20px/1.15 var(--display);overflow-wrap:anywhere}
+.tn-who{font-size:13.5px;color:var(--muted)}
+.tonight.empty .tn-dish{color:var(--muted);font-weight:600}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{display:grid;gap:2px;justify-items:start;text-align:left;border:1px solid var(--line);border-radius:var(--r-lg);padding:12px 14px;background:var(--surface);color:var(--ink)}
+.tile svg{width:24px;height:24px;margin-bottom:4px}
+.tile b{font:700 26px/1 var(--display);font-variant-numeric:tabular-nums}
+.tile span{font-size:13px;color:var(--muted)}
+.tile.shop svg,.tile.shop b{color:var(--accent)}
+.tile.chores svg,.tile.chores b{color:var(--lasse)}
+.tile.chores.all-done svg,.tile.chores.all-done b{color:var(--accent)}
+.tonight:hover,.tile:hover{filter:brightness(.98)}
+@media (min-width:980px){.glance{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);align-items:stretch}}
 </style>
 </head>
 <body>
@@ -364,6 +436,26 @@ textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;pa
     </div>
     <span class="hint" id="qa-hint">Skriv, eller tryk på mikrofonen på telefonens tastatur og sig det.</span>
   </form>
+
+  <!-- today at a glance: tonight's dinner in the cook's colour, then shopping and chores -->
+  <section class="glance" id="today-strip" hidden>
+    <button class="tonight" id="tonight" type="button">
+      <span class="tn-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M5 11v6a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-6"/><path d="M8 7c0-1.5 1-2 1-3M12 7c0-1.5 1-2 1-3M16 7c0-1.5 1-2 1-3"/></svg></span>
+      <span class="tn-lab">I aften</span>
+      <span class="tn-dish" id="tonight-dish"></span>
+      <span class="tn-who" id="tonight-who"></span>
+    </button>
+    <div class="tiles">
+      <button class="tile shop" id="tile-shop" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>
+        <b id="tile-shop-n">0</b><span id="tile-shop-l">varer på listen</span>
+      </button>
+      <button class="tile chores" id="tile-chores" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        <b id="tile-ch-n">0</b><span id="tile-ch-l">opgaver i dag</span>
+      </button>
+    </div>
+  </section>
 
   <nav class="tabs" role="tablist" aria-label="Sektioner">
     <button class="tab" role="tab" id="tab-week" data-tab="week" aria-selected="true">Uge</button>
@@ -827,19 +919,28 @@ function render(){
   renderOffers();renderWeek();renderShop();renderChores();renderSummary();
   if(!$('rcp').hidden)renderRecipe();
 }
+/* Today at a glance: the "I aften" card (in the cook's colour) and the shopping and chore tiles. */
 function renderSummary(){
+  $('summary').hidden=loaded;$('today-strip').hidden=!loaded;
   if(!loaded){$('summary').textContent='Indlæser tavlen…';return}
   const t=today(),ds=iso(t);
-  const ch=choresOn(t).filter(c=>!isDone(c,ds)).length,sh=S.shopping.filter(s=>!s.done).length;
-  const tonight=mealOn(ds);
-  const ck=cookOn(ds);
-  const parts=tonight?['Aftensmad i aften: ',h('strong',null,tonight.name),ck?' ('+PEOPLE[ck].name+' laver mad)':'','. I dag: ']:['I dag: '];
-  if(weekOffset===0&&CAL.ready){const ev=eventsOn(t).length;parts.push(h('strong',null,ev===0?'intet i kalenderen':ev+' ting i kalenderen'),', ')}
-  parts.push(h('strong',null,ch===0?'alle opgaver klaret':ch+(ch===1?' opgave tilbage':' opgaver tilbage')),', ',
-    h('strong',null,sh+(sh===1?' vare':' varer')),' på indkøbslisten.');
-  $('summary').replaceChildren(...parts);
-  $('n-shop').textContent=sh?'· '+sh:'';$('n-chores').textContent=ch?'· '+ch:'';
+  const chs=choresOn(t),left=chs.filter(c=>!isDone(c,ds)).length,sh=S.shopping.filter(s=>!s.done).length;
+  const m=mealOn(ds),ck=cookOn(ds),miss=m?missingFor(ds).length:0;
+  const card=$('tonight');card.dataset.p=m&&ck?ck:'';card.classList.toggle('empty',!m);
+  $('tonight-dish').textContent=m?m.name:'Ingen aftensmad planlagt';
+  const who=m?[ck?PEOPLE[ck].name+' laver mad':isLeftover(m)?'Restedag':'Hvem laver mad?']:['Tryk for at planlægge'];
+  if(miss)who.push(' · '+miss+(miss===1?' vare mangler':' varer mangler'));
+  $('tonight-who').textContent=who.join('');
+  $('tile-shop-n').textContent=sh;$('tile-shop-l').textContent=sh===1?'vare på listen':'varer på listen';
+  $('tile-ch-n').textContent=chs.length?(chs.length-left)+'/'+chs.length:'0';
+  $('tile-ch-l').textContent=!chs.length?'opgaver i dag':left?'opgaver klaret i dag':'alt klaret i dag';
+  $('tile-chores').classList.toggle('all-done',!!chs.length&&!left);
+  $('n-shop').textContent=sh?'· '+sh:'';$('n-chores').textContent=left?'· '+left:'';
 }
+function showPanel(name){setTab(name);document.querySelector('[data-panel="'+name+'"]').scrollIntoView({behavior:'smooth',block:'start'})}
+$('tonight').onclick=()=>openDinner(iso(today()));
+$('tile-shop').onclick=()=>showPanel('shop');
+$('tile-chores').onclick=()=>showPanel('chores');
 function evRow(e){
   return h('li',null,h('button',{class:'ev',type:'button',onclick:()=>openEvent(e)},
     h('span',{class:'t'+(e.soft?' soft':'')},e.label||'–'),
