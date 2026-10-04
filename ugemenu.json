@@ -1,112 +1,138 @@
 {
   "week": "2026-W41",
   "weekStart": "2026-10-05",
-  "generated": "2026-09-28T15:07:58+02:00",
+  "generated": "2026-10-04T07:11:09+02:00",
   "offers": {
-    "items": [],
+    "items": [
+      {"name": "Danpo kyllingefilet", "price": 49.00, "store": "Netto", "to": "2026-10-09"},
+      {"name": "Kyllingeunderlår eller -strimler af lårkød", "price": 25.00, "store": "Netto", "to": "2026-10-09"},
+      {"name": "Hakket oksekød 8-12%", "price": 35.00, "store": "Netto", "to": "2026-10-09"},
+      {"name": "Velsmag flæsk i skiver", "price": 55.00, "store": "Netto", "to": "2026-10-09"},
+      {"name": "Navito indbagt fisk", "price": 12.00, "store": "Netto", "to": "2026-10-09"},
+      {"name": "Danske Lammefjordskartofler", "price": 16.00, "store": "Netto", "to": "2026-10-09"},
+      {"name": "ØGO økologiske danske håndsorterede gulerødder", "price": 15.00, "store": "Netto", "to": "2026-10-09"},
+      {"name": "Mammen skæreost", "price": 99.00, "store": "Netto", "to": "2026-10-09"},
+      {"name": "Rose kyllingestrimler, -inderfilet eller -sandwichskiver", "price": 15.00, "store": "REMA 1000", "to": "2026-10-10"},
+      {"name": "Hakket dansk oksekød med grønt, grise- og kalvekød, kyllingekød eller Frilandsgris hakket skinkekød", "price": 25.00, "store": "REMA 1000", "to": "2026-10-10"},
+      {"name": "Danske hakkebøffer eller kalvesticks", "price": 29.00, "store": "REMA 1000", "to": "2026-10-10"},
+      {"name": "Røget, gravad eller varmrøget laks", "price": 39.00, "store": "REMA 1000", "to": "2026-10-10"},
+      {"name": "Gram Slot løg eller kartofler", "price": 10.00, "store": "REMA 1000", "to": "2026-10-10"},
+      {"name": "Kronekilde skæreost", "price": 39.00, "store": "REMA 1000", "to": "2026-10-10"},
+      {"name": "La Molisana pasta", "price": 15.00, "store": "REMA 1000", "to": "2026-10-10"}
+    ],
     "sources": [
       "https://www.tilbudmaskine.dk/netto/",
       "https://www.tilbudmaskine.dk/rema-1000/",
       "https://etilbudsavis.dk/Netto",
       "https://etilbudsavis.dk/REMA-1000",
-      "https://www.kimbino.dk/netto/",
-      "https://www.kimbino.dk/rema-1000/"
+      "https://www.tilbudsaviseronline.dk/butikker/netto/tilbudsavis",
+      "https://www.tilbudsaviseronline.dk/butikker/rema-1000/tilbudsavis",
+      "https://dinetilbudsaviser.dk/produkter/kylling",
+      "https://dinetilbudsaviser.dk/produkter/oksekod",
+      "https://dinetilbudsaviser.dk/produkter/svinekod",
+      "https://dinetilbudsaviser.dk/produkter/laks",
+      "https://dinetilbudsaviser.dk/produkter/kartofler",
+      "https://dinetilbudsaviser.dk/produkter/gulerod",
+      "https://dinetilbudsaviser.dk/produkter/ost",
+      "https://dinetilbudsaviser.dk/produkter/pasta"
     ],
     "validFrom": "2026-10-05",
     "validTo": "2026-10-09"
   },
   "dishes": [
     {
-      "dish": "Kylling i karry med ris",
-      "why": "Ingen tilbudsavis for uge 41 var offentliggjort endnu, så retten er valgt for variation og nem hverdagsmad.",
+      "dish": "Millionbøf med kartofler og gulerødder",
+      "why": "Bruger hakket oksekød fra Netto, kartofler fra REMA 1000 og gulerødder fra Netto.",
       "ingredients": [
-        {"name": "Kyllingebryst (500 g)", "offer": null, "kr": 45},
-        {"name": "Ris (300 g)", "offer": null, "kr": 10},
+        {"name": "Hakket oksekød 8-12% (500 g)", "offer": "Netto 35,00 kr", "kr": 35},
+        {"name": "Kartofler (800 g)", "offer": "REMA 1000 10,00 kr", "kr": 10},
         {"name": "Løg (2 stk)", "offer": null, "kr": 5},
-        {"name": "Karry (2 tsk)", "offer": null, "kr": 2},
-        {"name": "Kokosmælk (1 dåse)", "offer": null, "kr": 12},
-        {"name": "Bouillon (1 tsk)", "offer": null, "kr": 2},
-        {"name": "Æble (1 stk)", "offer": null, "kr": 4},
+        {"name": "Gulerødder (300 g)", "offer": "Netto 15,00 kr", "kr": 15},
+        {"name": "Ketchup (2 spsk)", "offer": null, "kr": 3},
+        {"name": "Worcestershiresauce (1 tsk)", "offer": null, "kr": 2},
+        {"name": "Piskefløde (2 dl)", "offer": null, "kr": 12},
+        {"name": "Smør (20 g)", "offer": null, "kr": 2}
+      ]
+    },
+    {
+      "dish": "Kyllingegryde med fløde og grøntsager",
+      "why": "Bruger kyllingestrimler fra REMA 1000 og gulerødder fra Nettos tilbud.",
+      "ingredients": [
+        {"name": "Kyllingestrimler (500 g)", "offer": "REMA 1000 15,00 kr", "kr": 15},
+        {"name": "Gulerødder (300 g)", "offer": "Netto 15,00 kr", "kr": 15},
+        {"name": "Løg (1 stk)", "offer": null, "kr": 3},
+        {"name": "Champignon (250 g)", "offer": null, "kr": 12},
+        {"name": "Piskefløde (2,5 dl)", "offer": null, "kr": 15},
+        {"name": "Hønsebouillon (1 tsk)", "offer": null, "kr": 2},
+        {"name": "Persille (1 bundt)", "offer": null, "kr": 10},
+        {"name": "Ris (300 g)", "offer": null, "kr": 10}
+      ]
+    },
+    {
+      "dish": "Frikadeller med kartofler og stuvede gulerødder",
+      "why": "Bruger det hakkede, blandede kød fra REMA 1000 og gulerødder fra Netto.",
+      "ingredients": [
+        {"name": "Blandet hakket kød (500 g)", "offer": "REMA 1000 25,00 kr", "kr": 25},
+        {"name": "Æg (1 stk)", "offer": null, "kr": 2},
+        {"name": "Rasp (2 spsk)", "offer": null, "kr": 3},
+        {"name": "Løg (1 stk)", "offer": null, "kr": 3},
+        {"name": "Mælk (1 dl)", "offer": null, "kr": 2},
+        {"name": "Kartofler (800 g)", "offer": null, "kr": 12},
+        {"name": "Gulerødder (300 g)", "offer": "Netto 15,00 kr", "kr": 15},
+        {"name": "Smør til stegning (20 g)", "offer": null, "kr": 2}
+      ]
+    },
+    {
+      "dish": "Pasta med røget laks og ærter",
+      "why": "Bruger røget laks og pasta fra REMA 1000s tilbud.",
+      "ingredients": [
+        {"name": "Pasta (400 g)", "offer": "REMA 1000 15,00 kr", "kr": 15},
+        {"name": "Røget laks (150 g)", "offer": "REMA 1000 39,00 kr", "kr": 39},
+        {"name": "Ærter, frosne (200 g)", "offer": null, "kr": 8},
+        {"name": "Piskefløde (2 dl)", "offer": null, "kr": 12},
+        {"name": "Citron (1 stk)", "offer": null, "kr": 5},
+        {"name": "Dild (1 bundt)", "offer": null, "kr": 10},
+        {"name": "Parmesan (50 g)", "offer": null, "kr": 10}
+      ]
+    },
+    {
+      "dish": "Grøntsagslasagne med gulerødder og ost",
+      "why": "Vegetarisk lasagne med gulerødder fra Netto og skæreost fra REMA 1000s tilbud.",
+      "ingredients": [
+        {"name": "Lasagneplader (250 g)", "offer": null, "kr": 15},
+        {"name": "Gulerødder (300 g)", "offer": "Netto 15,00 kr", "kr": 15},
+        {"name": "Squash (1 stk)", "offer": null, "kr": 8},
+        {"name": "Hakkede tomater (2 dåser)", "offer": null, "kr": 16},
+        {"name": "Løg (1 stk)", "offer": null, "kr": 3},
+        {"name": "Hvidløg (2 fed)", "offer": null, "kr": 2},
+        {"name": "Skæreost, revet (200 g)", "offer": "REMA 1000 39,00 kr", "kr": 39},
+        {"name": "Piskefløde (2 dl)", "offer": null, "kr": 12},
+        {"name": "Hvedemel (1 spsk)", "offer": null, "kr": 2}
+      ]
+    },
+    {
+      "dish": "Paneret svinekød med kartofler og rødkålssalat",
+      "why": "Bruger flæsk i skiver og kartofler fra Nettos tilbud.",
+      "ingredients": [
+        {"name": "Flæsk i skiver (500 g)", "offer": "Netto 55,00 kr", "kr": 55},
+        {"name": "Æg (1 stk)", "offer": null, "kr": 2},
+        {"name": "Rasp (100 g)", "offer": null, "kr": 8},
+        {"name": "Kartofler (800 g)", "offer": "Netto 16,00 kr", "kr": 16},
+        {"name": "Rødkål, syltet (1 glas)", "offer": null, "kr": 15},
+        {"name": "Citron (1 stk)", "offer": null, "kr": 5},
         {"name": "Persille (1 bundt)", "offer": null, "kr": 10}
       ]
     },
     {
-      "dish": "Spaghetti bolognese",
-      "why": "Klassisk hverdagsret der er nem at lave i en stor portion og smager godt som rester.",
+      "dish": "Hakkebøf med løg og kartofler",
+      "why": "Bruger hakkebøffer og løg fra REMA 1000s tilbud.",
       "ingredients": [
-        {"name": "Hakket oksekød (500 g)", "offer": null, "kr": 40},
-        {"name": "Spaghetti (500 g)", "offer": null, "kr": 12},
-        {"name": "Hakkede tomater (2 dåser)", "offer": null, "kr": 16},
-        {"name": "Løg (1 stk)", "offer": null, "kr": 3},
-        {"name": "Hvidløg (2 fed)", "offer": null, "kr": 2},
-        {"name": "Tomatpuré (1 tube)", "offer": null, "kr": 8},
-        {"name": "Revet parmesan (100 g)", "offer": null, "kr": 15},
-        {"name": "Gulerod (2 stk)", "offer": null, "kr": 5}
-      ]
-    },
-    {
-      "dish": "Ovnbagt torsk med kartofler og remoulade",
-      "why": "Let og hurtig fiskeret der giver variation i ugens menu.",
-      "ingredients": [
-        {"name": "Torskefilet (500 g)", "offer": null, "kr": 60},
+        {"name": "Hakkebøffer (500 g)", "offer": "REMA 1000 29,00 kr", "kr": 29},
+        {"name": "Løg (2 stk)", "offer": "REMA 1000 10,00 kr", "kr": 10},
         {"name": "Kartofler (800 g)", "offer": null, "kr": 12},
-        {"name": "Remoulade (1 glas)", "offer": null, "kr": 15},
-        {"name": "Citron (1 stk)", "offer": null, "kr": 5},
-        {"name": "Smør (50 g)", "offer": null, "kr": 5},
-        {"name": "Persille (1 bundt)", "offer": null, "kr": 10},
-        {"name": "Salatblade (1 pose)", "offer": null, "kr": 12}
-      ]
-    },
-    {
-      "dish": "Grøntsagssuppe med røde linser",
-      "why": "Varm og mættende vegetarisk suppe, der er nem at varme som rester senere i ugen.",
-      "ingredients": [
-        {"name": "Røde linser (250 g)", "offer": null, "kr": 12},
-        {"name": "Gulerod (3 stk)", "offer": null, "kr": 6},
-        {"name": "Selleri (1 stk)", "offer": null, "kr": 8},
-        {"name": "Løg (1 stk)", "offer": null, "kr": 3},
-        {"name": "Hakkede tomater (1 dåse)", "offer": null, "kr": 8},
-        {"name": "Grøntsagsbouillon (1 tsk)", "offer": null, "kr": 3},
-        {"name": "Fløde (1 dl)", "offer": null, "kr": 6},
-        {"name": "Brød (1 stk)", "offer": null, "kr": 20}
-      ]
-    },
-    {
-      "dish": "Stegt flæsk med persillesovs og kartofler",
-      "why": "Dansk klassiker der giver variation med svinekød midt i ugen.",
-      "ingredients": [
-        {"name": "Stegeflæsk (600 g)", "offer": null, "kr": 45},
-        {"name": "Kartofler (1 kg)", "offer": null, "kr": 15},
-        {"name": "Mælk (5 dl)", "offer": null, "kr": 6},
-        {"name": "Persille (1 bundt)", "offer": null, "kr": 10},
-        {"name": "Smør (30 g)", "offer": null, "kr": 3},
-        {"name": "Hvedemel (2 spsk)", "offer": null, "kr": 2}
-      ]
-    },
-    {
-      "dish": "Kylling i fad med peberfrugt og løg",
-      "why": "Nem fadret med kylling og grøntsager, hurtig at samle på en hverdagsaften.",
-      "ingredients": [
-        {"name": "Kyllingelår (6 stk)", "offer": null, "kr": 40},
-        {"name": "Peberfrugt (2 stk)", "offer": null, "kr": 12},
-        {"name": "Løg (2 stk)", "offer": null, "kr": 5},
-        {"name": "Hvidløg (2 fed)", "offer": null, "kr": 2},
-        {"name": "Olivenolie (2 spsk)", "offer": null, "kr": 3},
-        {"name": "Paprika (1 tsk)", "offer": null, "kr": 2},
-        {"name": "Ris eller couscous (300 g)", "offer": null, "kr": 10}
-      ]
-    },
-    {
-      "dish": "Pasta med tun, oliven og cherrytomater",
-      "why": "Hurtig fiskepasta til en travl hverdagsaften, klar på under 30 minutter.",
-      "ingredients": [
-        {"name": "Pasta (500 g)", "offer": null, "kr": 12},
-        {"name": "Tun i vand (2 dåser)", "offer": null, "kr": 20},
-        {"name": "Cherrytomater (250 g)", "offer": null, "kr": 15},
-        {"name": "Oliven (100 g)", "offer": null, "kr": 12},
-        {"name": "Hvidløg (2 fed)", "offer": null, "kr": 2},
-        {"name": "Olivenolie (2 spsk)", "offer": null, "kr": 3},
-        {"name": "Basilikum (1 bundt)", "offer": null, "kr": 10}
+        {"name": "Smør (20 g)", "offer": null, "kr": 2},
+        {"name": "Bouillon (2 dl)", "offer": null, "kr": 5},
+        {"name": "Persille (1 bundt)", "offer": null, "kr": 10}
       ]
     }
   ]
