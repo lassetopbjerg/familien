@@ -1,137 +1,480 @@
 {
-  "week": "2026-W42",
-  "weekStart": "2026-10-12",
-  "generated": "2026-10-11T07:16:28+02:00",
+  "week": "2026-W43",
+  "weekStart": "2026-10-19",
+  "generated": "2026-10-18T07:17:48+02:00",
   "offers": {
     "items": [
-      {"name": "Bistronne kyllingemærke", "price": 12.00, "store": "Netto", "to": "2026-10-16"},
-      {"name": "Hakket dansk kyllingekød 7-10% eller kyllingelårfilet", "price": 25.00, "store": "Netto", "to": "2026-10-16"},
-      {"name": "Tykstegsbøf", "price": 20.00, "store": "Netto", "to": "2026-10-16"},
-      {"name": "Hakket oksekød 14-18%", "price": 30.00, "store": "Netto", "to": "2026-10-16"},
-      {"name": "Dansk ovnklar flæskesteg", "price": 19.95, "store": "Netto", "to": "2026-10-16"},
-      {"name": "Nakkekoteletter", "price": 25.00, "store": "Netto", "to": "2026-10-16"},
-      {"name": "Bådsmænd grønlandske rejer, koldrøget eller gravad laks", "price": 30.00, "store": "Netto", "to": "2026-10-16"},
-      {"name": "Salling Princip varmrøget laks", "price": 65.00, "store": "Netto", "to": "2026-10-16"},
-      {"name": "Castello hård ost eller Cheasy skæreost", "price": 55.00, "store": "Netto", "to": "2026-10-16"},
-      {"name": "H.C. Andersen skæreost", "price": 99.00, "store": "Netto", "to": "2026-10-16"},
-      {"name": "Bettini pasta", "price": 13.00, "store": "Netto", "to": "2026-10-16"},
-      {"name": "Dansk kyllingeinderfilet", "price": 25.00, "store": "REMA 1000", "to": "2026-10-17"},
-      {"name": "Dansk kylling", "price": 29.00, "store": "REMA 1000", "to": "2026-10-17"},
-      {"name": "Hakket dansk oksekød 4-7% eller Burger Boost", "price": 35.00, "store": "REMA 1000", "to": "2026-10-17"},
-      {"name": "Mørbrad", "price": 25.00, "store": "REMA 1000", "to": "2026-10-17"},
-      {"name": "Planet Dairy revet tex mex eller cheddar", "price": 12.00, "store": "REMA 1000", "to": "2026-10-17"},
-      {"name": "Arla Klovborg eller Cheasy ost i skiver", "price": 22.00, "store": "REMA 1000", "to": "2026-10-17"},
-      {"name": "Jasminris", "price": 14.00, "store": "REMA 1000", "to": "2026-10-17"},
-      {"name": "Karolines Køkken piskefløde 36%", "price": 12.00, "store": "REMA 1000", "to": "2026-10-17"}
+      {
+        "name": "Netto hakket oksekød 8-12%",
+        "price": 35.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Danske kyllingeunderlår eller -overlår",
+        "price": 10.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Den Grønne Slagter kyllingebryst",
+        "price": 10.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Dansk kyllingebrystfilet, -inderfilet eller hakket kyllingekød 3-7%",
+        "price": 49.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Dansk kyllingelårfilet",
+        "price": 65.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Fersk laksestykker",
+        "price": 59.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Salling Princip sockeye, røget eller gravad laks",
+        "price": 35.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Salling Princip grønlandske rejer",
+        "price": 59.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Dava danske frilandsæg",
+        "price": 16.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Dansk broccoli",
+        "price": 12.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Samsø løg",
+        "price": 12.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Samsø rødløg",
+        "price": 7.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Samsø kartofler",
+        "price": 18.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Dansk knoldselleri",
+        "price": 12.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Skoleagurker",
+        "price": 13.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Snack tomater",
+        "price": 13.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Zelected pasta tortiglioni",
+        "price": 15.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Mutti tomatpuré",
+        "price": 15.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "La Campagna pesto alla genovese",
+        "price": 10.0,
+        "store": "Netto",
+        "to": "2026-10-23"
+      },
+      {
+        "name": "Hakkebøffer med Bacon",
+        "price": 20.0,
+        "store": "REMA 1000",
+        "to": "2026-10-24"
+      },
+      {
+        "name": "Hakket oksekød 8-12%",
+        "price": 39.0,
+        "store": "REMA 1000",
+        "to": "2026-10-24"
+      },
+      {
+        "name": "Hakket grisekød 8-12%",
+        "price": 25.0,
+        "store": "REMA 1000",
+        "to": "2026-10-24"
+      },
+      {
+        "name": "Hakket kylling 7-10%",
+        "price": 25.0,
+        "store": "REMA 1000",
+        "to": "2026-10-24"
+      },
+      {
+        "name": "Kyllingelårfilet",
+        "price": 25.0,
+        "store": "REMA 1000",
+        "to": "2026-10-24"
+      },
+      {
+        "name": "Kyllingebrystfilet",
+        "price": 25.0,
+        "store": "REMA 1000",
+        "to": "2026-10-24"
+      },
+      {
+        "name": "Laksefilet",
+        "price": 89.0,
+        "store": "REMA 1000",
+        "to": "2026-10-24"
+      }
     ],
     "sources": [
-      "https://netto.dk/tilbudsavis",
-      "https://www.kimbino.dk/netto/",
-      "https://www.kimbino.dk/rema-1000/",
-      "https://dinetilbudsaviser.dk/produkter/kylling",
-      "https://dinetilbudsaviser.dk/produkter/oksekod",
-      "https://dinetilbudsaviser.dk/produkter/svinekod",
-      "https://dinetilbudsaviser.dk/produkter/laks",
-      "https://dinetilbudsaviser.dk/produkter/ost",
-      "https://dinetilbudsaviser.dk/produkter/pasta",
-      "https://dinetilbudsaviser.dk/produkter/ris",
-      "https://dinetilbudsaviser.dk/produkter/flode"
+      "https://spareposen.dk/netto/n%C3%A6ste-uge-avis",
+      "https://dinetilbudsaviser.dk/netto-tilbudsavis",
+      "https://sundpaabudget.dk/sund-madplan-uge-43-2026/",
+      "https://www.tilbudsugen.dk/offer/rema%201000%20oksek%C3%B8d",
+      "https://www.tilbudsugen.dk/offer/rema%201000%20laks",
+      "https://www.tilbudsugen.dk/offer/rema%201000%20kyllingebryst",
+      "https://etilbudsavis.dk/Netto",
+      "https://etilbudsavis.dk/REMA-1000"
     ],
-    "validFrom": "2026-10-12",
-    "validTo": "2026-10-16"
+    "validFrom": "2026-10-19",
+    "validTo": "2026-10-23"
   },
   "dishes": [
     {
-      "dish": "Kyllingecurry med ris",
-      "why": "Bruger hakket kyllingekød fra Nettos tilbud, nem gryderet der varmer godt op som rester.",
+      "dish": "Hakkebøfgryde med rodfrugter og timian",
+      "why": "Bruger hakket oksekød, kartofler, løg og knoldselleri fra Nettos tilbud.",
       "ingredients": [
-        {"name": "Hakket dansk kyllingekød (500 g)", "offer": "Netto 25,00 kr", "kr": 25},
-        {"name": "Ris (300 g)", "offer": null, "kr": 10},
-        {"name": "Løg (2 stk)", "offer": null, "kr": 5},
-        {"name": "Karry (2 tsk)", "offer": null, "kr": 2},
-        {"name": "Kokosmælk (1 dåse)", "offer": null, "kr": 12},
-        {"name": "Hønsebouillon (1 tsk)", "offer": null, "kr": 2},
-        {"name": "Gulerødder (2 stk)", "offer": null, "kr": 6},
-        {"name": "Ingefær (1 tsk)", "offer": null, "kr": 3},
-        {"name": "Koriander (1 bundt)", "offer": null, "kr": 10}
+        {
+          "name": "Hakket oksekød (400 g)",
+          "offer": "Netto 35,00 kr",
+          "kr": 35
+        },
+        {
+          "name": "Gulerødder (250 g)",
+          "offer": null,
+          "kr": 8
+        },
+        {
+          "name": "Kartofler (500 g)",
+          "offer": "Netto 18,00 kr",
+          "kr": 18
+        },
+        {
+          "name": "Løg (2 stk)",
+          "offer": "Netto 12,00 kr",
+          "kr": 12
+        },
+        {
+          "name": "Knoldselleri (1 stk)",
+          "offer": "Netto 12,00 kr",
+          "kr": 12
+        },
+        {
+          "name": "Hvedemel (1 spsk)",
+          "offer": null,
+          "kr": 2
+        },
+        {
+          "name": "Oksebouillon (1 tsk)",
+          "offer": null,
+          "kr": 5
+        },
+        {
+          "name": "Frisk timian (1 bundt)",
+          "offer": null,
+          "kr": 10
+        },
+        {
+          "name": "Fløde 18% (1 dl)",
+          "offer": null,
+          "kr": 8
+        }
       ]
     },
     {
-      "dish": "Oksegryde med fløde og champignon",
-      "why": "Bruger hakket oksekød fra Netto og piskefløde fra REMA 1000s tilbud, en gryderet der er perfekt som rester.",
+      "dish": "Kylling tikka masala med ris",
+      "why": "Bruger kyllingelårfilet fra REMA 1000 samt løg og tomatpuré fra Netto.",
       "ingredients": [
-        {"name": "Hakket oksekød 14-18% (500 g)", "offer": "Netto 30,00 kr", "kr": 30},
-        {"name": "Champignon (250 g)", "offer": null, "kr": 12},
-        {"name": "Løg (1 stk)", "offer": null, "kr": 3},
-        {"name": "Piskefløde 36% (2,5 dl)", "offer": "REMA 1000 12,00 kr", "kr": 12},
-        {"name": "Oksebouillon (1 tsk)", "offer": null, "kr": 2},
-        {"name": "Worcestershiresauce (1 tsk)", "offer": null, "kr": 2},
-        {"name": "Kartofler eller ris (300 g)", "offer": null, "kr": 10},
-        {"name": "Persille (1 bundt)", "offer": null, "kr": 10}
+        {
+          "name": "Kyllingelårfilet (400 g)",
+          "offer": "REMA 1000 25,00 kr",
+          "kr": 25
+        },
+        {
+          "name": "Løg (1 stk)",
+          "offer": "Netto 12,00 kr",
+          "kr": 6
+        },
+        {
+          "name": "Hvidløg (2 fed)",
+          "offer": null,
+          "kr": 2
+        },
+        {
+          "name": "Tomatpuré (50 g)",
+          "offer": "Netto 15,00 kr",
+          "kr": 15
+        },
+        {
+          "name": "Tikka masala-krydderi (1 ps)",
+          "offer": null,
+          "kr": 15
+        },
+        {
+          "name": "Kokosmælk (200 ml)",
+          "offer": null,
+          "kr": 8
+        },
+        {
+          "name": "Ris (300 g)",
+          "offer": null,
+          "kr": 10
+        },
+        {
+          "name": "Frisk koriander (1 bundt)",
+          "offer": null,
+          "kr": 10
+        }
       ]
     },
     {
-      "dish": "Rød linsegryde med tomat og feta",
-      "why": "Mættende vegetarisk gryderet med røde linser, nem at varme som rester senere i ugen.",
+      "dish": "Ovnbagt laks med kartofler og broccoli",
+      "why": "Bruger ferske laksestykker, broccoli og kartofler fra Nettos tilbud.",
       "ingredients": [
-        {"name": "Røde linser (300 g)", "offer": null, "kr": 15},
-        {"name": "Hakkede tomater (2 dåser)", "offer": null, "kr": 16},
-        {"name": "Løg (1 stk)", "offer": null, "kr": 3},
-        {"name": "Hvidløg (2 fed)", "offer": null, "kr": 2},
-        {"name": "Grøntsagsbouillon (1 tsk)", "offer": null, "kr": 3},
-        {"name": "Spidskommen (1 tsk)", "offer": null, "kr": 2},
-        {"name": "Feta (150 g)", "offer": null, "kr": 20},
-        {"name": "Brød (1 stk)", "offer": null, "kr": 20}
+        {
+          "name": "Fersk laksestykker (500 g)",
+          "offer": "Netto 59,00 kr",
+          "kr": 59
+        },
+        {
+          "name": "Kartofler (500 g)",
+          "offer": "Netto 18,00 kr",
+          "kr": 18
+        },
+        {
+          "name": "Broccoli (1 stk)",
+          "offer": "Netto 12,00 kr",
+          "kr": 12
+        },
+        {
+          "name": "Citron (1 stk)",
+          "offer": null,
+          "kr": 5
+        },
+        {
+          "name": "Smør (25 g)",
+          "offer": null,
+          "kr": 3
+        },
+        {
+          "name": "Frisk dild (1 bundt)",
+          "offer": null,
+          "kr": 10
+        }
       ]
     },
     {
-      "dish": "Rejepasta med dild og citron",
-      "why": "Hurtig fiskeret med rejer og pasta fra Nettos tilbud, klar på under 30 minutter.",
+      "dish": "Grøn linsegryde med gulerødder og kokos",
+      "why": "Vegetarisk gryderet med løg fra Nettos tilbud og rodfrugter, der holder sig godt som rester.",
       "ingredients": [
-        {"name": "Pasta (400 g)", "offer": "Netto 13,00 kr", "kr": 13},
-        {"name": "Rejer (200 g)", "offer": "Netto 30,00 kr", "kr": 30},
-        {"name": "Piskefløde (2 dl)", "offer": "REMA 1000 12,00 kr", "kr": 12},
-        {"name": "Citron (1 stk)", "offer": null, "kr": 5},
-        {"name": "Dild (1 bundt)", "offer": null, "kr": 10},
-        {"name": "Hvidløg (2 fed)", "offer": null, "kr": 2},
-        {"name": "Parmesan (50 g)", "offer": null, "kr": 10}
+        {
+          "name": "Grønne linser (250 g)",
+          "offer": null,
+          "kr": 15
+        },
+        {
+          "name": "Gulerødder (300 g)",
+          "offer": null,
+          "kr": 8
+        },
+        {
+          "name": "Løg (1 stk)",
+          "offer": "Netto 12,00 kr",
+          "kr": 6
+        },
+        {
+          "name": "Hvidløg (2 fed)",
+          "offer": null,
+          "kr": 2
+        },
+        {
+          "name": "Kokosmælk (400 ml)",
+          "offer": null,
+          "kr": 12
+        },
+        {
+          "name": "Tomatpuré (1 spsk)",
+          "offer": "Netto 15,00 kr",
+          "kr": 5
+        },
+        {
+          "name": "Karry (1 tsk)",
+          "offer": null,
+          "kr": 3
+        },
+        {
+          "name": "Frisk spinat (100 g)",
+          "offer": null,
+          "kr": 10
+        }
       ]
     },
     {
-      "dish": "Flæskesteg med rødkål og kartofler",
-      "why": "Dansk klassiker der bruger den ovnklare flæskesteg fra Nettos tilbud.",
+      "dish": "Paneret kyllingebryst med agurkesalat og kartofler",
+      "why": "Bruger kyllingebrystfilet fra REMA 1000 samt agurker, rødløg og kartofler fra Netto.",
       "ingredients": [
-        {"name": "Dansk ovnklar flæskesteg (1 kg)", "offer": "Netto 19,95 kr", "kr": 20},
-        {"name": "Kartofler (1 kg)", "offer": null, "kr": 15},
-        {"name": "Rødkål, syltet (1 glas)", "offer": null, "kr": 15},
-        {"name": "Smør (20 g)", "offer": null, "kr": 2},
-        {"name": "Hvedemel (2 spsk)", "offer": null, "kr": 2},
-        {"name": "Sukker (1 spsk)", "offer": null, "kr": 2},
-        {"name": "Persille (1 bundt)", "offer": null, "kr": 10}
+        {
+          "name": "Kyllingebrystfilet (400 g)",
+          "offer": "REMA 1000 25,00 kr",
+          "kr": 25
+        },
+        {
+          "name": "Rasp (100 g)",
+          "offer": null,
+          "kr": 8
+        },
+        {
+          "name": "Æg (1 stk)",
+          "offer": "Netto 16,00 kr",
+          "kr": 4
+        },
+        {
+          "name": "Kartofler (500 g)",
+          "offer": "Netto 18,00 kr",
+          "kr": 18
+        },
+        {
+          "name": "Skoleagurker (1 stk)",
+          "offer": "Netto 13,00 kr",
+          "kr": 13
+        },
+        {
+          "name": "Rødløg (1 stk)",
+          "offer": "Netto 7,00 kr",
+          "kr": 7
+        },
+        {
+          "name": "Eddike og sukker (lidt)",
+          "offer": null,
+          "kr": 3
+        }
       ]
     },
     {
-      "dish": "Mørbradbøffer med kartofler og persillesovs",
-      "why": "Bruger mørbrad fra REMA 1000s tilbud, mild og hurtig hverdagsret.",
+      "dish": "Pasta med grønlandske rejer og tomat",
+      "why": "Bruger grønlandske rejer, pasta, tomatpuré og snacktomater fra Nettos tilbud.",
       "ingredients": [
-        {"name": "Mørbrad (500 g)", "offer": "REMA 1000 25,00 kr", "kr": 25},
-        {"name": "Kartofler (800 g)", "offer": null, "kr": 12},
-        {"name": "Mælk (3 dl)", "offer": null, "kr": 4},
-        {"name": "Hvedemel (2 spsk)", "offer": null, "kr": 2},
-        {"name": "Smør (30 g)", "offer": null, "kr": 3},
-        {"name": "Persille (1 bundt)", "offer": null, "kr": 10}
+        {
+          "name": "Pasta tortiglioni (250 g)",
+          "offer": "Netto 15,00 kr",
+          "kr": 15
+        },
+        {
+          "name": "Grønlandske rejer (200 g)",
+          "offer": "Netto 59,00 kr",
+          "kr": 59
+        },
+        {
+          "name": "Tomatpuré (1 spsk)",
+          "offer": "Netto 15,00 kr",
+          "kr": 5
+        },
+        {
+          "name": "Snack tomater (150 g)",
+          "offer": "Netto 13,00 kr",
+          "kr": 13
+        },
+        {
+          "name": "Hvidløg (2 fed)",
+          "offer": null,
+          "kr": 2
+        },
+        {
+          "name": "Chili (1/2 stk)",
+          "offer": null,
+          "kr": 2
+        },
+        {
+          "name": "Frisk persille (1 bundt)",
+          "offer": null,
+          "kr": 8
+        }
       ]
     },
     {
-      "dish": "Tykstegsbøf med bløde løg og kartofler",
-      "why": "Bruger tykstegsbøf fra Nettos tilbud, nem og hurtig stegt bøf til en hverdagsaften.",
+      "dish": "Grisekødsboller i tomatsauce med pasta",
+      "why": "Bruger hakket grisekød fra REMA 1000 samt tomatpuré og pasta fra Netto.",
       "ingredients": [
-        {"name": "Tykstegsbøf (500 g)", "offer": "Netto 20,00 kr", "kr": 20},
-        {"name": "Løg (3 stk)", "offer": null, "kr": 6},
-        {"name": "Kartofler (800 g)", "offer": null, "kr": 12},
-        {"name": "Smør (20 g)", "offer": null, "kr": 2},
-        {"name": "Bouillon (2 dl)", "offer": null, "kr": 5},
-        {"name": "Persille (1 bundt)", "offer": null, "kr": 10}
+        {
+          "name": "Hakket grisekød 8-12% (500 g)",
+          "offer": "REMA 1000 25,00 kr",
+          "kr": 25
+        },
+        {
+          "name": "Rasp (50 g)",
+          "offer": null,
+          "kr": 5
+        },
+        {
+          "name": "Æg (1 stk)",
+          "offer": "Netto 16,00 kr",
+          "kr": 4
+        },
+        {
+          "name": "Tomatpuré (1 dåse)",
+          "offer": "Netto 15,00 kr",
+          "kr": 15
+        },
+        {
+          "name": "Løg (1 stk)",
+          "offer": "Netto 12,00 kr",
+          "kr": 6
+        },
+        {
+          "name": "Pasta tortiglioni (250 g)",
+          "offer": "Netto 15,00 kr",
+          "kr": 15
+        },
+        {
+          "name": "Frisk basilikum (1 bundt)",
+          "offer": null,
+          "kr": 8
+        }
       ]
     }
   ]
